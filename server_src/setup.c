@@ -28,7 +28,7 @@ void	init_env(t_env *env)
 		print_err_exit("socket list", __FILE__, __LINE__, "socket out of range");
 	sin.sin_family = AF_INET;
 	sin.sin_addr.s_addr = INADDR_ANY;
-	sin.sin_port = htons(/*env->port*/8080);
+	sin.sin_port = htons(env->port);
 	Xi(-1, bind(svr_sock, (struct sockaddr*)&sin, sizeof(sin)), "bind");
 	Xi(-1, listen(svr_sock, 42), "listen");
 	env->fds[svr_sock].type = FD_SERV;

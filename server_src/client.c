@@ -41,7 +41,10 @@ void cln_write(t_env *e, int cs)
 	re = Xl(-1, send(cs, tmp, size, 0), "send");
 	if (re > 0)
 	{
-		e->fds[cs].buf_write = ft_strsub(e->fds[cs].buf_write, 0, (size_t)re);
+		e->fds[cs].buf_write = ft_strsub(e->fds[cs].buf_write, (size_t)re, size - re);
 		ft_strdel(&tmp);
-	}
+	} /*else
+	{
+		e->fds[cs].buf_write =;
+	}*/
 }
