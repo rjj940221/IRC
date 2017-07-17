@@ -32,4 +32,5 @@ int main(int ac, char **av)
 
 	get_opt(&env, ac, av);
 	init_env(&env);
+	main_loop(&env);
 }

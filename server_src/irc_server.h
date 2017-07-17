@@ -21,11 +21,13 @@
 # define MAX(a,b)	((a > b) ? a : b)
 # define USAGE		"Usage: %s <port>\n"
 
+struct	s_env;
+
 typedef struct	s_fd
 {
 	int		type;
-	void	(*fct_read)();
-	void	(*fct_write)();
+	void	(*fct_read)(struct s_env *env, int i);
+	void	(*fct_write)(struct s_env *env, int i);
 	char	buf_read[BUF_SIZE + 1];
 	char	*buf_write;
 }				t_fd;
@@ -42,7 +44,7 @@ typedef struct	s_env
 
 void	init_env(t_env *e);
 void	get_opt(t_env *e, int ac, char **av);
-void	main_loop(t_env *e);
+void	main_loop(t_env *env);
 void	svr_rcv(t_env *e, int ss);
 void	cln_read(t_env *e, int cs);
 void	cln_write(t_env *e, int cs);
