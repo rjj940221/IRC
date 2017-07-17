@@ -2507,6 +2507,7 @@ src/ipv.o: src/ipv.c.o
 
 # target to build an object file
 src/ipv.c.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/ipv.c.o
 	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/ipv.c.o
 .PHONY : src/ipv.c.o
 
@@ -2516,6 +2517,7 @@ src/ipv.i: src/ipv.c.i
 
 # target to preprocess a source file
 src/ipv.c.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/ipv.c.i
 	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/ipv.c.i
 .PHONY : src/ipv.c.i
 
@@ -2525,6 +2527,7 @@ src/ipv.s: src/ipv.c.s
 
 # target to generate assembly for a file
 src/ipv.c.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/ipv.c.s
 	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/ipv.c.s
 .PHONY : src/ipv.c.s
 

@@ -440,6 +440,7 @@
 			<Option target="client"/>
 		</Unit>
 		<Unit filename="/nfs/zfs-student-6/users/rojones/year2/IRC/src/ipv.c">
+			<Option target="server"/>
 			<Option target="client"/>
 		</Unit>
 		<Unit filename="/nfs/zfs-student-6/users/rojones/year2/IRC/CMakeLists.txt">

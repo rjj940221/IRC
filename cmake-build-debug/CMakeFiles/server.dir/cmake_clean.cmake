@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/server.dir/server_src/setup.c.o"
   "CMakeFiles/server.dir/server_src/receve.c.o"
   "CMakeFiles/server.dir/server_src/client.c.o"
+  "CMakeFiles/server.dir/src/ipv.c.o"
   "server.pdb"
   "server"
 )

@@ -63,12 +63,16 @@ irc_server.h
 /nfs/zfs-student-6/users/rojones/year2/IRC/server_src/setup.c
 netinet/in.h
 -
-tclDecls.h
--
 irc_server.h
 /nfs/zfs-student-6/users/rojones/year2/IRC/server_src/irc_server.h
 
 /nfs/zfs-student-6/users/rojones/year2/IRC/src/exwraper.c
+../irc.h
+/nfs/zfs-student-6/users/rojones/year2/IRC/irc.h
+
+/nfs/zfs-student-6/users/rojones/year2/IRC/src/ipv.c
+netdb.h
+-
 ../irc.h
 /nfs/zfs-student-6/users/rojones/year2/IRC/irc.h
 

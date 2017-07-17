@@ -3,7 +3,6 @@
 //
 
 #include <netinet/in.h>
-#include <tclDecls.h>
 #include "irc_server.h"
 
 void	clean_fd(t_fd *fd)

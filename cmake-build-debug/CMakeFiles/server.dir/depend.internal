@@ -24,3 +24,6 @@ CMakeFiles/server.dir/server_src/setup.c.o
 CMakeFiles/server.dir/src/exwraper.c.o
  /nfs/zfs-student-6/users/rojones/year2/IRC/irc.h
  /nfs/zfs-student-6/users/rojones/year2/IRC/src/exwraper.c
+CMakeFiles/server.dir/src/ipv.c.o
+ /nfs/zfs-student-6/users/rojones/year2/IRC/irc.h
+ /nfs/zfs-student-6/users/rojones/year2/IRC/src/ipv.c

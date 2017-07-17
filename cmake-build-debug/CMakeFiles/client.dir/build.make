@@ -142,6 +142,7 @@ client: CMakeFiles/client.dir/client_src/client.c.o
 client: CMakeFiles/client.dir/src/ipv.c.o
 client: CMakeFiles/client.dir/src/exwraper.c.o
 client: CMakeFiles/client.dir/build.make
+client: liblibft.a
 client: CMakeFiles/client.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/nfs/zfs-student-6/users/rojones/year2/IRC/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/client.dir/link.txt --verbose=$(VERBOSE)

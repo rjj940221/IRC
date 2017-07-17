@@ -24,3 +24,6 @@ CMakeFiles/server.dir/server_src/setup.c.o: ../server_src/setup.c
 CMakeFiles/server.dir/src/exwraper.c.o: ../irc.h
 CMakeFiles/server.dir/src/exwraper.c.o: ../src/exwraper.c
 
+CMakeFiles/server.dir/src/ipv.c.o: ../irc.h
+CMakeFiles/server.dir/src/ipv.c.o: ../src/ipv.c
+
