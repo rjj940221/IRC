@@ -20,12 +20,12 @@ void	init_env(t_env *env)
 	struct sockaddr_in	sin;
 	size_t	i;
 
-	env->fds =  Xv(NULL, malloc(sizeof(t_env) * MAX_FD), "socket list");
+	env->fds =  Xv(NULL, malloc(sizeof(t_env) * MAX_SOCK), "socket list");
 	i = 0;
-	while (i < MAX_FD)
+	while (i < MAX_SOCK)
 		clean_fd(&env->fds[i++]);
 	svr_sock = ipv4();
-	if (svr_sock >= MAX_FD)
+	if (svr_sock >= MAX_SOCK)
 		print_err_exit("socket list", __FILE__, __LINE__, "socket out of range");
 	sin.sin_family = AF_INET;
 	sin.sin_addr.s_addr = INADDR_ANY;

@@ -14,7 +14,7 @@
 # define FD_SERV	1
 # define FD_NSERV	2
 # define FD_CLIENT	3
-# define MAX_FD		100
+# define MAX_SOCK		100
 # define BUF_SIZE	4096
 
 
@@ -26,7 +26,7 @@ typedef struct	s_fd
 	int		type;
 	void	(*fct_read)();
 	void	(*fct_write)();
-	char	*buf_read[BUF_SIZE + 1];
+	char	buf_read[BUF_SIZE + 1];
 	char	*buf_write;
 }				t_fd;
 
