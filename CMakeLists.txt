@@ -10,7 +10,7 @@ set(SVR_SRC
         src/exwraper.c
         server_src/setup.c
         server_src/receve.c
-        server_src/client.c server_src/main_loop.c)
+        server_src/client.c server_src/main_loop.c server_src/cmd_nick.c)
 
 set(CLN_SRC client_src/client.c irc.h )
 set(COM_SRC src/ipv.c src/exwraper.c)

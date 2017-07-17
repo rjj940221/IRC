@@ -5,6 +5,7 @@
 #ifndef IRC_IRC_H
 #define IRC_IRC_H
 
+# include <netdb.h>
 # include <stdio.h>
 # include <memory.h>
 # include <sys/errno.h>

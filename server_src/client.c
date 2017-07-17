@@ -5,12 +5,33 @@
 
 #include "irc_server.h"
 
+char *get_cmd(t_env *e, int cs)
+{
+	char 	*crln;
+	char 	*tmp;
+	char 	*cmd;
+
+	crln = ft_strrchr(e->fds[cs].buf_read, '\r');
+	cmd = NULL;
+	if (crln && *crln + 1 == '\n')
+	{
+		tmp = e->fds[cs].buf_read;
+		cmd = ft_strsub(e->fds[cs].buf_read, 0, crln - tmp - 1);
+		e->fds[cs].buf_read = ft_strdup(crln + 2);
+		ft_strdel(&tmp);
+		ft_strdel(&cmd);
+	}
+	return (cmd);
+}
+
 void cln_read(t_env *e, int cs)
 {
 	ssize_t r;
-	int i;
+	char	buf[BUF_SIZE + 1];
+	int		i;
+	char 	*cmd;
 
-	r = recv(cs, e->fds[cs].buf_read, BUF_SIZE, 0);
+	r = recv(cs,buf, BUF_SIZE, 0);
 	if (r <= 0)
 	{
 		close(cs);
@@ -18,14 +39,18 @@ void cln_read(t_env *e, int cs)
 		printf("client #%d gone away\n", cs);
 	} else
 	{
-		e->fds[cs].buf_read[r] = '\0';
-		i = 0;
-		while (i < MAX_FD)
+		buf[r] = '\0';
+		e->fds[cs].buf_read = ft_strjoin_free_l(e->fds[cs].buf_read, buf);
+		if ((cmd = get_cmd(e, cs))!= NULL)
 		{
-			if ((e->fds[i].type == FD_CLIENT) && (i != cs))
-				e->fds[i].buf_write = ft_strjoin_free_l(e->fds[i].buf_write,
-						(const char *)e->fds[cs].buf_read);
-			i++;
+			i = 0;
+			while (i < MAX_FD)
+			{
+				if ((e->fds[i].type == FD_CLIENT) && (i != cs))
+					e->fds[i].buf_write = ft_strjoin_free_l(e->fds[i].buf_write, cmd);
+				i++;
+			}
+			ft_strdel(&cmd);
 		}
 	}
 }

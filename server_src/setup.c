@@ -10,6 +10,7 @@ void	clean_fd(t_fd *fd)
 	fd->fct_read = NULL;
 	fd->fct_write = NULL;
 	fd->buf_write = NULL;
+	ft_bzero(fd->nick, 10);
 	fd->type = FD_FREE;
 }
 

@@ -2,7 +2,7 @@
 // Created by Robert JONES on 2017/07/17.
 //
 
-#include <netdb.h>
+
 #include "../irc.h"
 
 int		ipv4()
