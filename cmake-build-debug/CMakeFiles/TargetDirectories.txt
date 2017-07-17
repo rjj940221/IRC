@@ -1,5 +1,0 @@
-/nfs/zfs-student-6/users/rojones/year2/IRC/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/nfs/zfs-student-6/users/rojones/year2/IRC/cmake-build-debug/CMakeFiles/edit_cache.dir
-/nfs/zfs-student-6/users/rojones/year2/IRC/cmake-build-debug/CMakeFiles/libft.dir
-/nfs/zfs-student-6/users/rojones/year2/IRC/cmake-build-debug/CMakeFiles/server.dir
-/nfs/zfs-student-6/users/rojones/year2/IRC/cmake-build-debug/CMakeFiles/client.dir
