@@ -35,6 +35,12 @@ typedef struct	s_fd
 	char 	nick[10];
 }				t_fd;
 
+typedef struct	s_channel
+{
+	char	*name;
+	int 	user[MAX_CHANNEL_USER];
+}				t_chl;
+
 typedef struct	s_env
 {
 	t_fd		*fds;
@@ -43,12 +49,13 @@ typedef struct	s_env
 	int		r;
 	fd_set	fd_read;
 	fd_set	fd_write;
+	t_chl	channels[MAX_CHANNEL];
 }		t_env;
 
 typedef struct	s_cmd
 {
 	char *name;
-	void (*fnc)();
+	void (*fnc)(t_env *env, char **av, int sock);
 }				t_cmd;
 
 void	init_env(t_env *e);

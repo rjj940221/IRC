@@ -11,6 +11,6 @@ int		ipv4()
 	struct protoent	*pt;
 
 	pt = (struct protoent*)Xv(NULL, getprotobyname("tcp"), "failed to get protocol");
-	sock = Xi(-1, socket(PF_INET, SOCK_STREAM, pt->p_proto),"failed to make socket");
+	sock = Xi(-1, socket(PF_INET, SOCK_STREAM, /*pt->p_proto*/ IPPROTO_TCP),"failed to make socket");
 	return (sock);
 }

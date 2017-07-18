@@ -14,7 +14,11 @@
 # define Xv(err,res,str)	(x_void(err,res,str,__FILE__,__LINE__))
 # define Xi(err,res,str)		(x_int(err,res,str,__FILE__,__LINE__))
 # define Xst(err,res,str)		(x_size_t(err,res,str,__FILE__,__LINE__))
-# define Xl(err,res,str)		(x_size_t(err,res,str,__FILE__,__LINE__))
+# define Xl(err,res,str)		(x_long(err,res,str,__FILE__,__LINE__))
+# define FALSE	0
+# define TRUE	1
+
+typedef  char t_bool;
 
 long	x_long(int err, long res, char *str, char *file, int line);
 int		x_int(int err, int res, char *str, char *file, int line);
