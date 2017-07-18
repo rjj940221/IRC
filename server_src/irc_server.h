@@ -17,6 +17,7 @@
 # define MAX_SOCK	100
 # define MAX_CHANNEL	20
 # define MAX_CHANNEL_USER 40
+
 # define BUF_SIZE	4096
 
 
@@ -37,7 +38,7 @@ typedef struct	s_fd
 
 typedef struct	s_channel
 {
-	char	*name;
+	char	name[CHANNEL_NAME];
 	int 	user[MAX_CHANNEL_USER];
 }				t_chl;
 
@@ -68,10 +69,13 @@ void	clean_fd(t_fd *fd);
 void	init_fd(t_env *e);
 void	check_fd(t_env *e);
 void	print_err_exit(char *class, char *file, int line, char *msg);
+void	cmd_join(t_env *e, char **av, int cs);
 void 	cmd_nick(t_env *e, char **av, int cs);
+void 	cmd_part(t_env *e, char **av, int cs);
 void 	queue_rsp(t_env *env, int cs, char *rsp, char *target);
 
 const static t_cmd g_cmds[] = {
+		{"JOIN", cmd_join},
 		{"NICK", cmd_nick},
 		{NULL, NULL}
 };

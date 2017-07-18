@@ -12,6 +12,7 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
+# define CHANNEL_NAME 200
 # define Xv(err,res,str)	(x_void(err,res,str,__FILE__,__LINE__))
 # define Xi(err,res,str)		(x_int(err,res,str,__FILE__,__LINE__))
 # define Xst(err,res,str)		(x_size_t(err,res,str,__FILE__,__LINE__))
@@ -29,5 +30,6 @@ size_t	x_size_t(int err, size_t res, char *str, char *file, int line);
 void	*x_void(void *err, void *res, char *str, char *file, int line);
 int 	ipv4(void);
 int		check_nick(char *nick);
+t_bool check_channle(char *name);
 
 #endif //IRC_IRC_H

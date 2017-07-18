@@ -14,6 +14,16 @@ void	clean_fd(t_fd *fd)
 	fd->type = FD_FREE;
 }
 
+void	clean_channle(t_chl *chl)
+{
+	int	*i;
+
+	i = chl->user;
+	while (i - chl->user < MAX_CHANNEL_USER)
+		*i = -1;
+	ft_bzero((void *)chl->name, CHANNEL_NAME);
+}
+
 void	init_env(t_env *env)
 {
 	int					svr_sock;
@@ -24,6 +34,9 @@ void	init_env(t_env *env)
 	i = 0;
 	while (i < MAX_SOCK)
 		clean_fd(&env->fds[i++]);
+	i = 0;
+	while (i < MAX_CHANNEL)
+		clean_channle(&env->channels[i++]);
 	svr_sock = ipv4();
 	if (svr_sock >= MAX_SOCK)
 		print_err_exit("socket list", __FILE__, __LINE__, "socket out of range");
