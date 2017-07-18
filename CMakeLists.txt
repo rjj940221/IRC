@@ -12,7 +12,7 @@ set(SVR_SRC
         server_src/receve.c
         server_src/client.c
         server_src/main_loop.c
-        server_src/cmd_nick.c)
+        server_src/cmd_nick.c server_src/responce.c)
 
 set(CLN_SRC
         client_src/client.c

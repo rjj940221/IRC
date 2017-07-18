@@ -69,7 +69,9 @@ size_t				ft_receve_data(char **data);
 void				ft_data_connection();
 void 				cmd_nick(char **data);
 
+
 static t_builtin_cmd	g_builtin_cmd[] = {
+	{"/nick", cmd_nick},
 	{NULL, NULL}
 };
 

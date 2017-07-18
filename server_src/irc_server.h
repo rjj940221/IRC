@@ -69,6 +69,7 @@ void	init_fd(t_env *e);
 void	check_fd(t_env *e);
 void	print_err_exit(char *class, char *file, int line, char *msg);
 void 	cmd_nick(t_env *e, char **av, int cs);
+void 	queue_rsp(t_env *env, int cs, char *rsp, char *target);
 
 const static t_cmd g_cmds[] = {
 		{"NICK", cmd_nick},

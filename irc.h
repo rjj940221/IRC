@@ -19,7 +19,9 @@
 # define FALSE	0
 # define TRUE	1
 
-typedef  char t_bool;
+typedef char t_bool;
+
+typedef struct	s_responce
 
 long	x_long(int err, long res, char *str, char *file, int line);
 int		x_int(int err, int res, char *str, char *file, int line);

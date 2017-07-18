@@ -35,13 +35,12 @@ char *get_cmd(t_env *e, int cs)
 
 	crln = ft_strrchr(e->fds[cs].buf_read, '\r');
 	cmd = NULL;
-	if (crln && *crln + 1 == '\n')
+	if (crln && *(crln + 1) == '\n')
 	{
 		tmp = e->fds[cs].buf_read;
 		cmd = ft_strsub(e->fds[cs].buf_read, 0, crln - tmp - 1);
 		e->fds[cs].buf_read = ft_strdup(crln + 2);
 		ft_strdel(&tmp);
-		ft_strdel(&cmd);
 	}
 	return (cmd);
 }
@@ -72,6 +71,7 @@ void cln_read(t_env *e, int cs)
 					e->fds[i].buf_write = ft_strjoin_free_l(e->fds[i].buf_write, cmd);
 				i++;
 			}
+			search_cmd(e, cmd, cs);
 			ft_strdel(&cmd);
 		}
 	}
