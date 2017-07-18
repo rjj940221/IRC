@@ -26,7 +26,7 @@ void *get_in_addr(struct sockaddr *sa)
 void	loop_connection(struct addrinfo *servinfo)
 {
 	struct addrinfo *p;
-	char 			*s;
+	char 			s[INET6_ADDRSTRLEN];
 
 	p = servinfo;
 	while (p != NULL)
@@ -43,7 +43,7 @@ void	loop_connection(struct addrinfo *servinfo)
 		fprintf(stderr, "client: failed to connect\n");
 	else
 	{
-		inet_ntop(p->ai_family, get_in_addr((struct sockaddr *) p->ai_addr),
+		inet_ntop(p->ai_family, get_in_addr(p->ai_addr),
 				  s, sizeof s);
 		printf("client: connecting to %s\n", s);
 	}

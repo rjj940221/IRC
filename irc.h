@@ -10,6 +10,7 @@
 # include <memory.h>
 # include <sys/errno.h>
 # include <stdlib.h>
+# include "libft/libft.h"
 
 # define Xv(err,res,str)	(x_void(err,res,str,__FILE__,__LINE__))
 # define Xi(err,res,str)		(x_int(err,res,str,__FILE__,__LINE__))
@@ -25,5 +26,6 @@ int		x_int(int err, int res, char *str, char *file, int line);
 size_t	x_size_t(int err, size_t res, char *str, char *file, int line);
 void	*x_void(void *err, void *res, char *str, char *file, int line);
 int 	ipv4(void);
+int		check_nick(char *nick);
 
 #endif //IRC_IRC_H

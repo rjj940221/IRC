@@ -67,6 +67,7 @@ void				ft_print_exit(char *str);
 //void				ft_send_cmd(t_cmd cmd);
 size_t				ft_receve_data(char **data);
 void				ft_data_connection();
+void 				cmd_nick(char **data);
 
 static t_builtin_cmd	g_builtin_cmd[] = {
 	{NULL, NULL}

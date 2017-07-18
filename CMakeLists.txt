@@ -21,8 +21,8 @@ set(CLN_SRC
         client_src/ft_recponce.c
         client_src/ft_search_builtin.c
         client_src/irc_client.h
-        client_src/suport.c)
-set(COM_SRC src/ipv.c src/exwraper.c)
+        client_src/suport.c client_src/nick.c)
+set(COM_SRC src/ipv.c src/exwraper.c src/check_nick.c)
 aux_source_directory(libft LIBFT)
 
 include_directories(libft)

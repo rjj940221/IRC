@@ -150,6 +150,7 @@ int					ft_numwords(char const *s, char c);
 int					ft_picklencon(va_list vl, int c, t_mod mod);
 int					ft_prepconvert(int num, int base, int c, t_mod *mod);
 void				ft_stringformatwide(wchar_t *s, t_mod *mod);
+size_t				ft_strarrlen(const char **str);
 size_t				ft_strlenwide(wchar_t *str);
 void				ft_padwide(wchar_t *s, t_mod *mod, int *chrc);
 void				ft_putstrwide(wchar_t *s);
