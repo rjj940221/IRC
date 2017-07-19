@@ -7,20 +7,25 @@
 
 void	clean_fd(t_fd *fd)
 {
+	size_t i;
+
 	fd->fct_read = NULL;
 	fd->fct_write = NULL;
 	fd->buf_write = NULL;
 	ft_bzero(fd->nick, 10);
 	fd->type = FD_FREE;
+	i = 0;
+	while (i < MAX_CHANNEL)
+		fd->channels[i++] = -1;
 }
 
 void	clean_channle(t_chl *chl)
 {
-	int	*i;
+	size_t	i;
 
-	i = chl->user;
-	while (i - chl->user < MAX_CHANNEL_USER)
-		*i = -1;
+	i = 0;
+	while (i < MAX_CHANNEL_USER)
+		chl->user[i++] = -1;
 	ft_bzero((void *)chl->name, CHANNEL_NAME);
 }
 

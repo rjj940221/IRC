@@ -59,20 +59,15 @@ extern t_clt_env	g_clt_env;
 void				connect_to_server(void);
 void				search_builin(char *line);
 int					check_port(const char *str);
-void				ft_cd(char **argv);
-//void				ft_cmd_responce_dell(t_cmd_rsp **rsp);
 void				ft_print_exit(char *str);
-//t_cmd_rsp			*ft_get_cmd_responce(void);
-//void				ft_process_rsp(t_cmd_rsp rsp);
-//void				ft_send_cmd(t_cmd cmd);
-size_t				ft_receve_data(char **data);
-void				ft_data_connection();
 void 				cmd_nick(char **data);
+void 				cmd_connect(char **data);
 
 
 static t_builtin_cmd	g_builtin_cmd[] = {
-	{"/nick", cmd_nick},
-	{NULL, NULL}
+		{"/connect", cmd_connect},
+		{"/nick", cmd_nick},
+		{NULL, NULL}
 };
 
 #endif

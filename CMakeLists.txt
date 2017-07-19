@@ -12,7 +12,7 @@ set(SVR_SRC
         server_src/receve.c
         server_src/client.c
         server_src/main_loop.c
-        server_src/cmd_nick.c server_src/responce.c server_src/cmd_join.c server_src/cmd_part.c)
+        server_src/cmd_nick.c server_src/responce.c server_src/cmd_join.c server_src/cmd_part.c server_src/cmd_names.c)
 
 set(CLN_SRC
         client_src/client.c
@@ -21,7 +21,7 @@ set(CLN_SRC
         client_src/ft_recponce.c
         client_src/ft_search_builtin.c
         client_src/irc_client.h
-        client_src/suport.c client_src/nick.c)
+        client_src/suport.c client_src/nick.c client_src/connect.c)
 set(COM_SRC src/ipv.c src/exwraper.c src/check_nick.c src/check_channle_name.c)
 aux_source_directory(libft LIBFT)
 

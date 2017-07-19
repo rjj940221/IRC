@@ -4,7 +4,23 @@
 
 #include "irc_server.h"
 
-void	join_channel(t_env *e, t_chl *chl, int cs)
+void	save_channle(t_env *e, int chlidx, int cs)
+{
+	size_t i;
+
+	i = 0;
+	while (i < MAX_CHANNEL)
+	{
+		if (e->fds[cs].channels[i] == -1)
+		{
+			e->fds[cs].channels[i] = chlidx;
+			return ;
+		}
+		i++;
+	}
+}
+
+void	join_channel(t_env *e, t_chl *chl, int cs, int chlidx)
 {
 	size_t i;
 
@@ -14,6 +30,7 @@ void	join_channel(t_env *e, t_chl *chl, int cs)
 		if (chl->user[i] == -1)
 		{
 			chl->user[i] = cs;
+			save_channle(e, chlidx, cs);
 			//todo join successful
 		}
 		i++;
@@ -33,6 +50,7 @@ void	create_channel(t_env *e, char *name, int cs)
 		{
 			e->channels[i].user[0] = cs;
 			ft_strcpy(e->channels[i].name, name);
+			save_channle(e, (int)i, cs);
 			//todo join successful
 		}
 		i++;
@@ -41,15 +59,19 @@ void	create_channel(t_env *e, char *name, int cs)
 		queue_rsp(e, cs, "405", NULL);
 }
 
-t_chl *find_channel(t_env *e, char *name)
+t_chl *find_channel(t_env *e, char *name, int *chlidx)
 {
 	size_t i;
 
 	i = 0;
+	*chlidx = -1;
 	while (i < MAX_CHANNEL)
 	{
 		if (ft_strcmp((const char *)e->channels[i].name, name) == 0)
+		{
+			*chlidx = (int)i;
 			return (&e->channels[i]);
+		}
 		i++;
 	}
 	return (NULL);
@@ -57,13 +79,14 @@ t_chl *find_channel(t_env *e, char *name)
 
 void cmd_join(t_env *e, char **av, int cs)
 {
-	size_t	tmp;
+	size_t	ac;
 	char	**spl;
 	char 	**tas;
 	t_chl	*chl;
+	int 	idx;
 
-	tmp = ft_strarrlen((const char **) av);
-	if (tmp < 2 || tmp > 3)
+	ac = ft_strarrlen((const char **) av);
+	if (ac < 2 || ac > 3)
 		return (queue_rsp(e, cs, "461", NULL));
 	spl = ft_strsplit(av[1], ',');
 	tas = spl;
@@ -71,9 +94,9 @@ void cmd_join(t_env *e, char **av, int cs)
 	{
 		if (check_channle(*tas) == FALSE)
 			queue_rsp(e,cs,"476", NULL);
-		chl = find_channel(e,*tas);
+		chl = find_channel(e,*tas, &idx);
 		if (chl)
-			join_channel(e, chl, cs);
+			join_channel(e, chl, cs, idx);
 		else
 			create_channel(e, *tas, cs);
 		tas++;

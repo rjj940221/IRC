@@ -34,6 +34,7 @@ typedef struct	s_fd
 	char	*buf_read;
 	char	*buf_write;
 	char 	nick[10];
+	int 	channels[MAX_CHANNEL];
 }				t_fd;
 
 typedef struct	s_channel
@@ -65,11 +66,13 @@ void	main_loop(t_env *env);
 void	svr_rcv(t_env *e, int ss);
 void	cln_read(t_env *e, int cs);
 void	cln_write(t_env *e, int cs);
+void	clean_channle(t_chl *chl);
 void	clean_fd(t_fd *fd);
 void	init_fd(t_env *e);
 void	check_fd(t_env *e);
 void	print_err_exit(char *class, char *file, int line, char *msg);
 void	cmd_join(t_env *e, char **av, int cs);
+void 	cmd_names(t_env *e, char **av, int cs);
 void 	cmd_nick(t_env *e, char **av, int cs);
 void 	cmd_part(t_env *e, char **av, int cs);
 void 	queue_rsp(t_env *env, int cs, char *rsp, char *target);
