@@ -73,9 +73,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	ft_bzero(re, size);
 	ft_strcpy(re, s1);
 	ft_strcat(re, s2);
-	if (s1)
-		free(s1);
-	if (s2)
-		free(s2);
+	ft_strdel(&s1);
+	ft_strdel(&s2);
 	return (re);
 }

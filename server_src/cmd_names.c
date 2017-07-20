@@ -17,7 +17,7 @@ void name_all(t_env *e, int cs)
 		{
 			if ((nrsp = rpl_namrply(&e->channels[i], e)))
 			{
-				queue_rsp(e,cs,nrsp,NULL);
+				queue_rsp(e, cs, nrsp, NULL);
 				ft_strdel(&nrsp);
 			}
 			rsp = ft_strjoin("336 ", e->channels[i].name);
@@ -43,7 +43,7 @@ void name_list(t_env *e, char **av, int cs)
 	{
 		if ((names = rpl_namrply(find_channel(e, *tmp, &chidx), e)))
 		{
-			queue_rsp(e,cs,names,NULL);
+			queue_rsp(e, cs, names, NULL);
 			ft_strdel(&names);
 		}
 		rsp = ft_strjoin("336 ", *tmp);
@@ -63,5 +63,8 @@ void cmd_names(t_env *e, char **av, int cs)
 	ac = ft_strarrlen((const char **) av);
 	if (ac > 2)
 		return (queue_rsp(e, cs, "366", NULL));
-
+	else if (ac == 1)
+		return (name_all(e, cs));
+	else
+		return (name_list(e, av, cs));
 }

@@ -23,6 +23,7 @@ void	save_channle(t_env *e, int chlidx, int cs)
 void	join_channel(t_env *e, t_chl *chl, int cs, int chlidx)
 {
 	size_t i;
+	char	*nrpl;
 
 	i = 0;
 	while (i < MAX_CHANNEL_USER)
@@ -31,7 +32,9 @@ void	join_channel(t_env *e, t_chl *chl, int cs, int chlidx)
 		{
 			chl->user[i] = cs;
 			save_channle(e, chlidx, cs);
-			rpl_namrply(chl, e);
+			if ((nrpl = rpl_namrply(chl, e)))
+				e->fds[cs].buf_write = ft_strjoin_free(e->fds[cs].buf_write, nrpl);
+			return ;
 		}
 		i++;
 	}
@@ -42,6 +45,7 @@ void	join_channel(t_env *e, t_chl *chl, int cs, int chlidx)
 void	create_channel(t_env *e, char *name, int cs)
 {
 	size_t i;
+	char	*nrpl;
 
 	i = 0;
 	while (i < MAX_CHANNEL)
@@ -51,7 +55,9 @@ void	create_channel(t_env *e, char *name, int cs)
 			e->channels[i].user[0] = cs;
 			ft_strcpy(e->channels[i].name, name);
 			save_channle(e, (int)i, cs);
-			rpl_namrply(&e->channels[i], e);
+			if ((nrpl = rpl_namrply(&e->channels[i], e)))
+				e->fds[cs].buf_write = ft_strjoin_free(e->fds[cs].buf_write, nrpl);
+			return ;
 		}
 		i++;
 	}

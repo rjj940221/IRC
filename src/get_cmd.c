@@ -18,7 +18,7 @@ char *get_cmd(char **read_buff)
 		if (*(crln + 1) == '\n')
 		{
 			tmp = *read_buff;
-			cmd = ft_strsub(*read_buff, 0, crln - tmp - 1);
+			cmd = ft_strsub(*read_buff, 0, crln - tmp);
 			*read_buff = ft_strdup(crln + 2);
 			ft_strdel(&tmp);
 			return (cmd);

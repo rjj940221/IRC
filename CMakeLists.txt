@@ -21,7 +21,7 @@ set(CLN_SRC
         client_src/ft_recponce.c
         client_src/ft_search_builtin.c
         client_src/irc_client.h
-        client_src/support.c client_src/cmd_nick.c client_src/connect.c client_src/data_transfer.c client_src/cmd_join.c client_src/cmd_leave.cpp client_src/cmd_who.c client_src/cmd_privmsg.c)
+        client_src/support.c client_src/cmd_nick.c client_src/connect.c client_src/data_transfer.c client_src/cmd_join.c client_src/cmd_leave.c client_src/cmd_who.c client_src/cmd_privmsg.c)
 set(COM_SRC src/ipv.c src/exwraper.c src/check_nick.c src/check_channle_name.c src/split_cmd.c src/get_cmd.c)
 aux_source_directory(libft LIBFT)
 

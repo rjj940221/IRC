@@ -86,7 +86,8 @@ void input_loop(void)
 		FD_ZERO(&readfds);
 		FD_ZERO(&writefds);
 		FD_SET(0, &readfds);
-		FD_SET(g_clt_env.svr_sock, &writefds);
+		if (g_clt_env.writbuff)
+			FD_SET(g_clt_env.svr_sock, &writefds);
 		FD_SET(g_clt_env.svr_sock, &readfds);
 		Xi(-1, select(g_clt_env.svr_sock + 1, &readfds, &writefds, NULL, NULL), "select");
 		if (FD_ISSET(0, &readfds))

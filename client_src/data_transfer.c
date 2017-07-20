@@ -42,7 +42,7 @@ void	rcv_data()
 		g_clt_env.readbuff = ft_strjoin_free_l(g_clt_env.readbuff, buf);
 		while ((cmd = get_cmd(&g_clt_env.readbuff)) != NULL)
 		{
-			ft_putstr(cmd);
+			printf("%s\n",cmd);
 			ft_strdel(&cmd);
 		}
 	}

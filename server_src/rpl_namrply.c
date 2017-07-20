@@ -25,6 +25,7 @@ char *rpl_namrply(t_chl *chl, t_env *e)
 		rsp = ft_strjoin("353 ", chl->name);
 		rsp = ft_strjoin_free_l(rsp, " :");
 		rsp = ft_strjoin_free(rsp, names);
+		rsp = ft_strjoin_free_l(rsp, CMD_TERM);
 	}
 	return (rsp);
 }
