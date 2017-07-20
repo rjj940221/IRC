@@ -63,20 +63,23 @@ void				search_builin(char *line);
 int					check_port(const char *str);
 void				ft_print_exit(char *str);
 void 				cmd_join(char **data);
+void                cmd_leave(char **data);
 void 				cmd_nick(char **data);
 void 				cmd_privmsg(char **data);
+void 				cmd_who(char **data);
 void 				cmd_connect(char **data);
 void				close_svr_sock();
-void	send_write_buff(void);
-void	add_write_buff(char *data);
-void	rcv_data();
-
-
-
+void				send_write_buff(void);
+void				add_write_buff(char *data);
+void				rcv_data();
 
 static t_builtin_cmd	g_builtin_cmd[] = {
 		{"/connect", cmd_connect},
+		{"/join", cmd_join},
+		{"/leave", cmd_leave},
 		{"/nick", cmd_nick},
+		{"/msg", cmd_privmsg},
+		{"/who", cmd_who},
 		{NULL, NULL}
 };
 

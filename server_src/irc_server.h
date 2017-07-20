@@ -83,7 +83,10 @@ t_bool	user_in_chl(t_chl *chl, int user_id);
 
 const static t_cmd g_cmds[] = {
 		{"JOIN", cmd_join},
+		{"NAMES", cmd_names},
 		{"NICK", cmd_nick},
+		{"PART", cmd_part},
+		{"PRIVMSG", cmd_privmsg},
 		{NULL, NULL}
 };
 
