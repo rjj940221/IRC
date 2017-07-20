@@ -19,7 +19,6 @@ void *get_in_addr(struct sockaddr *sa)
 	if (sa->sa_family == AF_INET) {
 		return &(((struct sockaddr_in*)sa)->sin_addr);
 	}
-
 	return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
@@ -40,7 +39,10 @@ void	loop_connection(struct addrinfo *servinfo)
 			break;
 	}
 	if (p == NULL)
+	{
 		fprintf(stderr, "client: failed to connect\n");
+		close_svr_sock();
+	}
 	else
 	{
 		inet_ntop(p->ai_family, get_in_addr(p->ai_addr),
@@ -73,27 +75,30 @@ void connect_to_server(void)
 	freeaddrinfo(servinfo);
 }
 
-/*
-void		ft_process_rsp(t_cmd_rsp rsp)
-{
-	if (rsp.code >= 200 && rsp.code < 300)
-		printf("\x1b[32mSUCCESS(%d):\x1b[0m %s\n", rsp.code, rsp.msg);
-	if (rsp.code >= 300 && rsp.code < 400)
-		printf("\x1b[33mPENDING(%d):\x1b[0m %s\n", rsp.code, rsp.msg);
-	if (rsp.code >= 400 && rsp.code < 600)
-		printf("\x1b[31mERROR(%d):\x1b[0m %s\n", rsp.code, rsp.msg);
-}
-*/
-
 void input_loop(void)
 {
+	fd_set readfds;
+	fd_set writefds;
 	char *line;
 
 	while (1)
 	{
-		get_next_line(0, &line);
-		search_builin(line);
-		free(line);
+		FD_ZERO(&readfds);
+		FD_ZERO(&writefds);
+		FD_SET(0, &readfds);
+		FD_SET(g_clt_env.svr_sock, &writefds);
+		FD_SET(g_clt_env.svr_sock, &readfds);
+		Xi(-1, select(g_clt_env.svr_sock + 1, &readfds, &writefds, NULL, NULL), "select");
+		if (FD_ISSET(0, &readfds))
+		{
+			get_next_line(0, &line);
+			search_builin(line);
+			free(line);
+		}
+		if (FD_ISSET(g_clt_env.svr_sock, &writefds))
+			send_write_buff();
+		if (FD_ISSET(g_clt_env.svr_sock, &readfds))
+			rcv_data();
 	}
 }
 
@@ -114,7 +119,6 @@ int main(int ac, char **av)
 	}
 	if (signal(SIGINT, catch_inturupt) == SIG_ERR)
 		ft_print_exit("failed to set up interrupt catch");
-	g_clt_env.svr_sock = ipv4();
 	if (ac > 1)
 	{
 		g_clt_env.host = av[1];

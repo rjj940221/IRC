@@ -18,7 +18,7 @@
 # define MAX_CHANNEL	20
 # define MAX_CHANNEL_USER 40
 
-# define BUF_SIZE	4096
+
 
 
 # define MAX(a,b)	((a > b) ? a : b)
@@ -60,14 +60,16 @@ typedef struct	s_cmd
 	void (*fnc)(t_env *env, char **av, int sock);
 }				t_cmd;
 
-void	init_env(t_env *e);
-void	get_opt(t_env *e, int ac, char **av);
-void	main_loop(t_env *env);
-void	svr_rcv(t_env *e, int ss);
 void	cln_read(t_env *e, int cs);
 void	cln_write(t_env *e, int cs);
 void	clean_channle(t_chl *chl);
 void	clean_fd(t_fd *fd);
+t_chl 	*find_channel(t_env *e, char *name, int *chlidx);
+void	get_opt(t_env *e, int ac, char **av);
+void	init_env(t_env *e);
+void	main_loop(t_env *env);
+char	*rpl_namrply(t_chl *chl, t_env *e);
+void	svr_rcv(t_env *e, int ss);
 void	init_fd(t_env *e);
 void	check_fd(t_env *e);
 void	print_err_exit(char *class, char *file, int line, char *msg);
@@ -75,7 +77,9 @@ void	cmd_join(t_env *e, char **av, int cs);
 void 	cmd_names(t_env *e, char **av, int cs);
 void 	cmd_nick(t_env *e, char **av, int cs);
 void 	cmd_part(t_env *e, char **av, int cs);
+void	cmd_privmsg(t_env *e, char **av, int cs);
 void 	queue_rsp(t_env *env, int cs, char *rsp, char *target);
+t_bool	user_in_chl(t_chl *chl, int user_id);
 
 const static t_cmd g_cmds[] = {
 		{"JOIN", cmd_join},

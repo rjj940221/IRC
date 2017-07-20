@@ -23,6 +23,12 @@ int		check_port(const char *str)
 	return (1);
 }
 
+void	close_svr_sock()
+{
+	close(g_clt_env.svr_sock);
+	g_clt_env.svr_sock = -1;
+}
+
 void	ft_print_exit(char *str)
 {
 	printf("\x1b[31mERROR: %s\x1b[31m\n", str);

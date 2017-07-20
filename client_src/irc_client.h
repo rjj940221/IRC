@@ -44,9 +44,11 @@ typedef struct		s_clt_env
 	int		svr_sock;
 	char 	*host;
 	char 	*port;
+	char 	*writbuff;
+	char 	*readbuff;
 }					t_clt_env;
 
-typedef void(*t_builtin)(char **argv);
+typedef void(*t_builtin)(char **data);
 
 typedef struct		s_builtin_cmd
 {
@@ -60,8 +62,16 @@ void				connect_to_server(void);
 void				search_builin(char *line);
 int					check_port(const char *str);
 void				ft_print_exit(char *str);
+void 				cmd_join(char **data);
 void 				cmd_nick(char **data);
+void 				cmd_privmsg(char **data);
 void 				cmd_connect(char **data);
+void				close_svr_sock();
+void	send_write_buff(void);
+void	add_write_buff(char *data);
+void	rcv_data();
+
+
 
 
 static t_builtin_cmd	g_builtin_cmd[] = {

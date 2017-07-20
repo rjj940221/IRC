@@ -19,9 +19,7 @@ void	init_fd(t_env *e)
 		{
 			FD_SET(i, &e->fd_read);
 			if (e->fds[i].buf_write)
-			{
 				FD_SET(i, &e->fd_write);
-			}
 			e->max = MAX(e->max, i);
 		}
 		i++;

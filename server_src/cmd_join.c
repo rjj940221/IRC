@@ -31,7 +31,7 @@ void	join_channel(t_env *e, t_chl *chl, int cs, int chlidx)
 		{
 			chl->user[i] = cs;
 			save_channle(e, chlidx, cs);
-			//todo join successful
+			rpl_namrply(chl, e);
 		}
 		i++;
 	}
@@ -51,7 +51,7 @@ void	create_channel(t_env *e, char *name, int cs)
 			e->channels[i].user[0] = cs;
 			ft_strcpy(e->channels[i].name, name);
 			save_channle(e, (int)i, cs);
-			//todo join successful
+			rpl_namrply(&e->channels[i], e);
 		}
 		i++;
 	}
@@ -59,23 +59,7 @@ void	create_channel(t_env *e, char *name, int cs)
 		queue_rsp(e, cs, "405", NULL);
 }
 
-t_chl *find_channel(t_env *e, char *name, int *chlidx)
-{
-	size_t i;
 
-	i = 0;
-	*chlidx = -1;
-	while (i < MAX_CHANNEL)
-	{
-		if (ft_strcmp((const char *)e->channels[i].name, name) == 0)
-		{
-			*chlidx = (int)i;
-			return (&e->channels[i]);
-		}
-		i++;
-	}
-	return (NULL);
-}
 
 void cmd_join(t_env *e, char **av, int cs)
 {

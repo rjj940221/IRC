@@ -45,7 +45,7 @@ void part_all(t_env *e, int cs)
 	}
 }
 
-void remove_channel_idx(t_fd *fd, int chlidx)
+void remove_channel_idx(t_fd *fd, size_t chlidx)
 {
 	size_t	i;
 	t_bool	found;
@@ -76,8 +76,12 @@ void part_list(t_env *e, char **spl, int cs)
 		while (ci < MAX_CHANNEL)
 		{
 			if (ft_strcmp(e->channels[ci].name, *spl) == 0)
-				if (!part_channel(e, cs, &e->channels[ci]))
+			{
+				if (part_channel(e, cs, &e->channels[ci]) == FALSE)
 					queue_rsp(e, cs, "442", NULL);
+				else
+					remove_channel_idx(&e->fds[cs], ci);
+			}
 			ci++;
 		}
 		if (ci == MAX_CHANNEL)
