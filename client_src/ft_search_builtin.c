@@ -17,6 +17,8 @@ void		search_builin(char *line)
 	char			**tav;
 	t_builtin_cmd	*tmp;
 
+	if (!line)
+		return ;
 	tav = ft_strsplit_fn(line, isspace);
 	tmp = g_builtin_cmd;
 	while (tmp->cmd)

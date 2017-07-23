@@ -11,6 +11,7 @@ char *forward_msg(char *sender, char *recv, char *msg)
 	forward = ft_strjoin(":", sender);
 	forward = ft_strjoin_free_l(forward, " PRIVMSG ");
 	forward = ft_strjoin_free_l(forward, recv);
+	forward = ft_strjoin_free_l(forward, " ");
 	forward = ft_strjoin_free_l(forward, msg);
 	return (forward);
 }
@@ -89,6 +90,7 @@ void cmd_privmsg(t_env *e, char **av, int cs)
 				privmsg_chl(e, *tmp, av[2], cs);
 			else
 				privmsg_nick(e, *tmp, av[2], cs);
+			tmp++;
 		}
 		ft_strarrdel(&spl);
 	}

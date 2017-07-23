@@ -75,6 +75,8 @@ void cmd_join(t_env *e, char **av, int cs)
 	t_chl	*chl;
 	int 	idx;
 
+	if (e->fds[cs].nick[0] == '\0')
+		return (queue_rsp(e,cs,"476 :Nick not set", NULL));
 	ac = ft_strarrlen((const char **) av);
 	if (ac < 2 || ac > 3)
 		return (queue_rsp(e, cs, "461", NULL));
@@ -83,7 +85,7 @@ void cmd_join(t_env *e, char **av, int cs)
 	while (*tas)
 	{
 		if (check_channle(*tas) == FALSE)
-			queue_rsp(e,cs,"476", NULL);
+			return (queue_rsp(e,cs,"476 :Channel invalid channel name", NULL));
 		chl = find_channel(e,*tas, &idx);
 		if (chl)
 			join_channel(e, chl, cs, idx);
