@@ -29,6 +29,12 @@ void	close_svr_sock()
 	g_clt_env.svr_sock = -1;
 }
 
+void	print_prompt()
+{
+	printf("IRC$> ");
+	fflush(stdout);
+}
+
 void	ft_print_exit(char *str)
 {
 	printf("\x1b[31mERROR: %s\x1b[31m\n", str);

@@ -23,7 +23,7 @@ void		search_builin(char *line)
 	tmp = g_builtin_cmd;
 	while (tmp->cmd)
 	{
-		if (strcmp(tav[0], tmp->cmd) == 0)
+		if (tav && tav[0] && ft_strcmp(tav[0], tmp->cmd) == 0)
 		{
 			(*tmp->fnc)(tav);
 			ft_strarrdel(&tav);

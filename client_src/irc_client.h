@@ -72,6 +72,7 @@ void				close_svr_sock();
 void				send_write_buff(void);
 void				add_write_buff(char *data);
 void				rcv_data();
+void				print_prompt();
 
 static t_builtin_cmd	g_builtin_cmd[] = {
 		{"/connect", cmd_connect},

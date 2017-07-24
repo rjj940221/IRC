@@ -46,7 +46,8 @@ void	rcv_data()
 			//printf("\033[%dG", 1);
 			//printf("\r\033[%d@", (int)ft_strlen(cmd) + 1);
 			//printf("\033[%dL", 1);
-			printf("\e[A%s\e[B",cmd);
+			printf("\033[s\r\033[%zu@%s\033[u",ft_strlen(cmd) + 1,cmd);
+			fflush(stdout);
 			//puts("\033[u");
 			ft_strdel(&cmd);
 		}

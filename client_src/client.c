@@ -81,20 +81,23 @@ void input_loop(void)
 	fd_set writefds;
 	char *line;
 
+	print_prompt();
 	while (1)
 	{
 		FD_ZERO(&readfds);
 		FD_ZERO(&writefds);
 		FD_SET(0, &readfds);
-		if (g_clt_env.writbuff)
+		if (g_clt_env.writbuff && g_clt_env.svr_sock != -1)
 			FD_SET(g_clt_env.svr_sock, &writefds);
-		FD_SET(g_clt_env.svr_sock, &readfds);
-		Xi(-1, select(g_clt_env.svr_sock + 1, &readfds, &writefds, NULL, NULL), "select");
+		if (g_clt_env.svr_sock != -1)
+			FD_SET(g_clt_env.svr_sock, &readfds);
+		Xi(-1, select((g_clt_env.svr_sock == -1) ? 1 : g_clt_env.svr_sock + 1, &readfds, &writefds, NULL, NULL), "select");
 		if (FD_ISSET(0, &readfds))
 		{
 			get_next_line(0, &line);
 			search_builin(line);
 			free(line);
+			print_prompt();
 		}
 		if (FD_ISSET(g_clt_env.svr_sock, &writefds))
 			send_write_buff();
@@ -106,7 +109,6 @@ void input_loop(void)
 static void catch_inturupt(int signo)
 {
 	printf("SIGNAL: %d\n", signo);
-	//ft_quit(NULL);
 	exit(1);
 }
 
