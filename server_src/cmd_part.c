@@ -4,7 +4,7 @@
 
 #include "irc_server.h"
 
-t_bool	part_channel(t_env *e, int cs, t_chl *chl)
+t_bool	part_channel(int cs, t_chl *chl)
 {
 	size_t ui;
 	t_bool found;
@@ -39,7 +39,7 @@ void part_all(t_env *e, int cs)
 	ci = 0;
 	while (ci < MAX_CHANNEL && e->fds[cs].channels[ci] != -1)
 	{
-		part_channel(e, cs, &e->channels[e->fds[cs].channels[ci]]);
+		part_channel( cs, &e->channels[e->fds[cs].channels[ci]]);
 		e->fds[cs].channels[ci] = -1;
 		ci++;
 	}
@@ -77,7 +77,7 @@ void part_list(t_env *e, char **spl, int cs)
 		{
 			if (ft_strcmp(e->channels[ci].name, *spl) == 0)
 			{
-				if (part_channel(e, cs, &e->channels[ci]) == FALSE)
+				if (part_channel(cs, &e->channels[ci]) == FALSE)
 					queue_rsp(e, cs, "442", NULL);
 				else
 					remove_channel_idx(&e->fds[cs], ci);

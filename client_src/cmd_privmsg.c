@@ -24,5 +24,5 @@ void	cmd_privmsg(char **data)
 		add_write_buff(send_data);
 	}
 	else
-		printf("usage: /msg <nick> <message>\n\te.g.\t/msg bob,#bar hi bob and all on #foo");
+		printf("usage: /msg <nick> <message>\n\te.g.\t/msg bob,#bar hi bob and all on #foo\n");
 }

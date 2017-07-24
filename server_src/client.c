@@ -39,6 +39,7 @@ void cln_read(t_env *e, int cs)
 	r = recv(cs, buf, BUF_SIZE, 0);
 	if (r <= 0)
 	{
+		part_all(e, cs);
 		close(cs);
 		clean_fd(&e->fds[cs]);
 		printf("client #%d gone away\n", cs);

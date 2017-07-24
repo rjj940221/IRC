@@ -80,6 +80,7 @@ void 	cmd_part(t_env *e, char **av, int cs);
 void	cmd_privmsg(t_env *e, char **av, int cs);
 void 	queue_rsp(t_env *env, int cs, char *rsp, char *target);
 t_bool	user_in_chl(t_chl *chl, int user_id);
+void	part_all(t_env *e, int cs);
 
 const static t_cmd g_cmds[] = {
 		{"JOIN", cmd_join},

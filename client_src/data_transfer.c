@@ -42,7 +42,12 @@ void	rcv_data()
 		g_clt_env.readbuff = ft_strjoin_free_l(g_clt_env.readbuff, buf);
 		while ((cmd = get_cmd(&g_clt_env.readbuff)) != NULL)
 		{
-			printf("%s\n",cmd);
+			//puts("\033[s");
+			//printf("\033[%dG", 1);
+			//printf("\r\033[%d@", (int)ft_strlen(cmd) + 1);
+			//printf("\033[%dL", 1);
+			printf("\e[A%s\e[B",cmd);
+			//puts("\033[u");
 			ft_strdel(&cmd);
 		}
 	}

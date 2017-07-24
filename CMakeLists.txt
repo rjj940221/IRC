@@ -17,8 +17,6 @@ set(SVR_SRC
 set(CLN_SRC
         client_src/client.c
         irc.h
-        client_src/ft_receve_data.c
-        client_src/ft_recponce.c
         client_src/ft_search_builtin.c
         client_src/irc_client.h
         client_src/support.c client_src/cmd_nick.c client_src/connect.c client_src/data_transfer.c client_src/cmd_join.c client_src/cmd_leave.c client_src/cmd_who.c client_src/cmd_privmsg.c)

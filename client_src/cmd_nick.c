@@ -10,18 +10,17 @@ void 				cmd_nick(char **data)
 
 	if (ft_strarrlen((const char **) data) != 2)
 	{
-		printf("/nick error: incorect paramiter count");
+		printf("nick error: incorect paramiter count\n");
 		return ;
 	}
 	if (check_nick(data[1]) == 0)
 	{
-		printf("nick names must be up to 9 charicters ([a-z] | [A-Z] | '[]{})");
+		printf("nick names must be up to 9 charicters ([a-z] | [A-Z] | '[]{})\n");
 		return ;
 	}
 	send_data = ft_strdup("NICK ");
 	send_data = ft_strjoin_free_l(send_data, data[1]);
 	send_data = ft_strjoin_free_l(send_data, CMD_TERM);
-	//send(g_clt_env.svr_sock, send_data, ft_strlen(send_data), 0);
 	add_write_buff(send_data);
 	ft_strdel(&send_data);
 }
