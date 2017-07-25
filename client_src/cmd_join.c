@@ -17,5 +17,8 @@ void	cmd_join(char **data)
 		add_write_buff(send_data);
 	}
 	else
-		printf("usage: /join <#channel>[,#channel] \n\te.g.\t/join #foo,#bar\n");
+	{
+		wprintw(g_clt_env.winrsp, "usage: /join <#channel>[,#channel] \n\te.g.\t/join #foo,#bar\n");
+		return_cmd();
+	}
 }

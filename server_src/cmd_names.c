@@ -20,7 +20,7 @@ void name_all(t_env *e, int cs)
 				queue_rsp(e, cs, nrsp, NULL);
 				ft_strdel(&nrsp);
 			}
-			rsp = ft_strjoin("336 ", e->channels[i].name);
+			rsp = ft_strjoin("366 ", e->channels[i].name);
 			rsp = ft_strjoin_free_l(rsp, " :End of NAMES list");
 			queue_rsp(e, cs, rsp, NULL);
 			ft_strdel(&rsp);
@@ -46,7 +46,7 @@ void name_list(t_env *e, char **av, int cs)
 			queue_rsp(e, cs, names, NULL);
 			ft_strdel(&names);
 		}
-		rsp = ft_strjoin("336 ", *tmp);
+		rsp = ft_strjoin("366 ", *tmp);
 		rsp = ft_strjoin_free_l(rsp, " :End of NAMES list");
 		queue_rsp(e, cs, rsp, NULL);
 		ft_strdel(&rsp);
@@ -62,7 +62,7 @@ void cmd_names(t_env *e, char **av, int cs)
 
 	ac = ft_strarrlen((const char **) av);
 	if (ac > 2)
-		return (queue_rsp(e, cs, "366", NULL));
+		return (queue_rsp(e, cs, "366 :End of NAMES list", NULL));
 	else if (ac == 1)
 		return (name_all(e, cs));
 	else

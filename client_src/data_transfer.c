@@ -35,20 +35,16 @@ void	rcv_data()
 	if (r <= 0)
 	{
 		close_svr_sock();
-		printf("lost server connection\n");
+		wprintw(g_clt_env.winrsp, "lost server connection\n");
 	} else
 	{
 		buf[r] = '\0';
 		g_clt_env.readbuff = ft_strjoin_free_l(g_clt_env.readbuff, buf);
 		while ((cmd = get_cmd(&g_clt_env.readbuff)) != NULL)
 		{
-			//puts("\033[s");
-			//printf("\033[%dG", 1);
-			//printf("\r\033[%d@", (int)ft_strlen(cmd) + 1);
-			//printf("\033[%dL", 1);
-			printf("\033[s\r\033[%zu@%s\033[u",ft_strlen(cmd) + 1,cmd);
-			fflush(stdout);
-			//puts("\033[u");
+			wprintw(g_clt_env.winrsp, "%s\n", cmd);
+			//this sort of works//printf("\033[s\r\033[%zu@%s\033[u\033[%zuC",ft_strlen(cmd) + 1, cmd, ft_strlen(cmd) + 1);
+			return_cmd();
 			ft_strdel(&cmd);
 		}
 	}

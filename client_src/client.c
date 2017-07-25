@@ -12,20 +12,21 @@
 
 #include "irc_client.h"
 
-t_clt_env g_clt_env = (t_clt_env) {-1, NULL, 0};
+t_clt_env g_clt_env = (t_clt_env) {-1, NULL, NULL, NULL, NULL, NULL, NULL, 0};
 
 void *get_in_addr(struct sockaddr *sa)
 {
-	if (sa->sa_family == AF_INET) {
-		return &(((struct sockaddr_in*)sa)->sin_addr);
+	if (sa->sa_family == AF_INET)
+	{
+		return &(((struct sockaddr_in *) sa)->sin_addr);
 	}
-	return &(((struct sockaddr_in6*)sa)->sin6_addr);
+	return &(((struct sockaddr_in6 *) sa)->sin6_addr);
 }
 
-void	loop_connection(struct addrinfo *servinfo)
+void loop_connection(struct addrinfo *servinfo)
 {
 	struct addrinfo *p;
-	char 			s[INET6_ADDRSTRLEN];
+	char s[INET6_ADDRSTRLEN];
 
 	p = servinfo;
 	while (p != NULL)
@@ -33,21 +34,20 @@ void	loop_connection(struct addrinfo *servinfo)
 		if (connect(g_clt_env.svr_sock, p->ai_addr, p->ai_addrlen) == -1)
 		{
 			close(g_clt_env.svr_sock);
-			perror("client: connect");
 			p = p->ai_next;
 		} else
 			break;
 	}
 	if (p == NULL)
 	{
-		fprintf(stderr, "client: failed to connect\n");
+		wprintw(g_clt_env.winrsp, "client: failed to connect\n");
 		close_svr_sock();
-	}
-	else
+	} else
 	{
 		inet_ntop(p->ai_family, get_in_addr(p->ai_addr),
 				  s, sizeof s);
-		printf("client: connecting to %s\n", s);
+		wprintw(g_clt_env.winrsp, "client: connecting to %s\n", s);
+		return_cmd();
 	}
 }
 
@@ -79,9 +79,8 @@ void input_loop(void)
 {
 	fd_set readfds;
 	fd_set writefds;
-	char *line;
 
-	print_prompt();
+	g_clt_env.idx = 0;
 	while (1)
 	{
 		FD_ZERO(&readfds);
@@ -93,12 +92,7 @@ void input_loop(void)
 			FD_SET(g_clt_env.svr_sock, &readfds);
 		Xi(-1, select((g_clt_env.svr_sock == -1) ? 1 : g_clt_env.svr_sock + 1, &readfds, &writefds, NULL, NULL), "select");
 		if (FD_ISSET(0, &readfds))
-		{
-			get_next_line(0, &line);
-			search_builin(line);
-			free(line);
-			print_prompt();
-		}
+			input_handler(wgetch(g_clt_env.wincmd));
 		if (FD_ISSET(g_clt_env.svr_sock, &writefds))
 			send_write_buff();
 		if (FD_ISSET(g_clt_env.svr_sock, &readfds))
@@ -106,11 +100,32 @@ void input_loop(void)
 	}
 }
 
+void initwindow()
+{
+	int winrow;
+	int wincol;
+
+	initscr();
+	cbreak();
+	noecho();
+	refresh();
+	getmaxyx(stdscr, winrow, wincol);
+	g_clt_env.winrsp = newwin(winrow - 1, wincol, 0, 0);
+	g_clt_env.wincmd = newwin(1, wincol, winrow - 1, 0);
+	keypad(g_clt_env.wincmd, true);
+	scrollok(g_clt_env.wincmd, true);
+	scrollok(g_clt_env.winrsp, true);
+	wrefresh(g_clt_env.wincmd);
+	return_cmd();
+}
+
 static void catch_inturupt(int signo)
 {
-	printf("SIGNAL: %d\n", signo);
+	close_all();
 	exit(1);
 }
+
+
 
 int main(int ac, char **av)
 {
@@ -122,6 +137,9 @@ int main(int ac, char **av)
 	}
 	if (signal(SIGINT, catch_inturupt) == SIG_ERR)
 		ft_print_exit("failed to set up interrupt catch");
+	if (signal(SIGWINCH, catch_inturupt) == SIG_ERR)
+		ft_print_exit("failed to set up resize catch");
+	initwindow();
 	if (ac > 1)
 	{
 		g_clt_env.host = av[1];
@@ -131,4 +149,5 @@ int main(int ac, char **av)
 		connect_to_server();
 	}
 	input_loop();
+	return (0);
 }

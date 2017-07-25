@@ -10,6 +10,11 @@
 # include <sys/select.h>
 # include "../irc.h"
 # include "../libft/libft.h"
+# define Xv(err,res,str)	(x_void(err,res,str,__FILE__,__LINE__))
+# define Xi(err,res,str)		(x_int(err,res,str,__FILE__,__LINE__))
+# define Xst(err,res,str)		(x_size_t(err,res,str,__FILE__,__LINE__))
+# define Xl(err,res,str)		(x_long(err,res,str,__FILE__,__LINE__))
+
 # define FD_FREE	0
 # define FD_SERV	1
 # define FD_NSERV	2
@@ -81,6 +86,11 @@ void	cmd_privmsg(t_env *e, char **av, int cs);
 void 	queue_rsp(t_env *env, int cs, char *rsp, char *target);
 t_bool	user_in_chl(t_chl *chl, int user_id);
 void	part_all(t_env *e, int cs);
+long	x_long(int err, long res, char *str, char *file, int line);
+int		x_int(int err, int res, char *str, char *file, int line);
+size_t	x_size_t(int err, size_t res, char *str, char *file, int line);
+void	*x_void(void *err, void *res, char *str, char *file, int line);
+int 	ipv4(void);
 
 const static t_cmd g_cmds[] = {
 		{"JOIN", cmd_join},

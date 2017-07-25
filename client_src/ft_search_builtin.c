@@ -12,13 +12,13 @@
 
 #include "irc_client.h"
 
-void		search_builin(char *line)
+void search_builin(char *line)
 {
-	char			**tav;
-	t_builtin_cmd	*tmp;
+	char **tav;
+	t_builtin_cmd *tmp;
 
 	if (!line)
-		return ;
+		return;
 	tav = ft_strsplit_fn(line, isspace);
 	tmp = g_builtin_cmd;
 	while (tmp->cmd)
@@ -27,10 +27,11 @@ void		search_builin(char *line)
 		{
 			(*tmp->fnc)(tav);
 			ft_strarrdel(&tav);
-			return ;
+			return;
 		}
 		tmp++;
 	}
-	printf("\x1b[mError: Command not recognised'%s'\n\x1b[0m", tav[0]);
+	wprintw(g_clt_env.winrsp, "Error: Command not recognised'%s'\n", tav[0]);
+	return_cmd();
 	ft_strarrdel(&tav);
 }

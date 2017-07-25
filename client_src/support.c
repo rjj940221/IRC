@@ -29,16 +29,36 @@ void	close_svr_sock()
 	g_clt_env.svr_sock = -1;
 }
 
-void	print_prompt()
+void	return_cmd()
 {
-	printf("IRC$> ");
-	fflush(stdout);
+	wmove(g_clt_env.wincmd, 0, (int)g_clt_env.idx);
+	wrefresh(g_clt_env.winrsp);
+	wrefresh(g_clt_env.wincmd);
+}
+
+void	close_ncurses()
+{
+	if (g_clt_env.winrsp)
+		delwin(g_clt_env.winrsp);
+	if (g_clt_env.wincmd)
+		delwin(g_clt_env.wincmd);
+	g_clt_env.wincmd = NULL;
+	g_clt_env.winrsp = NULL;
+	endwin();
+	endwin();
+}
+
+void close_all()
+{
+	ft_strdel(&g_clt_env.readbuff);
+	ft_strdel(&g_clt_env.writbuff);
+	close_svr_sock();
+	close_ncurses();
 }
 
 void	ft_print_exit(char *str)
 {
+	close_all();
 	printf("\x1b[31mERROR: %s\x1b[31m\n", str);
-	if (g_clt_env.svr_sock > -1)
-		close(g_clt_env.svr_sock);
 	exit(1);
 }

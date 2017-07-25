@@ -3,7 +3,7 @@
 //
 
 
-#include "../irc.h"
+#include "irc_server.h"
 
 int		ipv4()
 {

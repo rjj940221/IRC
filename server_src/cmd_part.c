@@ -78,14 +78,15 @@ void part_list(t_env *e, char **spl, int cs)
 			if (ft_strcmp(e->channels[ci].name, *spl) == 0)
 			{
 				if (part_channel(cs, &e->channels[ci]) == FALSE)
-					queue_rsp(e, cs, "442", NULL);
+					queue_rsp(e, cs, "442 :You're not on that channel", NULL);
 				else
 					remove_channel_idx(&e->fds[cs], ci);
+				break ;
 			}
 			ci++;
 		}
 		if (ci == MAX_CHANNEL)
-			queue_rsp(e, cs,"403", NULL);
+			queue_rsp(e, cs,"403 :No such channel", NULL);
 		spl++;
 	}
 }
@@ -105,5 +106,5 @@ void cmd_part(t_env *e, char **av, int cs)
 		ft_strarrdel(&spl);
 	}
 	else
-		queue_rsp(e, cs, "461", NULL);
+		queue_rsp(e, cs, "461 :Not enough parameters", NULL);
 }

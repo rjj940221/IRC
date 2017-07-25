@@ -38,7 +38,13 @@
 # include <stdio.h>
 # include <sys/param.h>
 # include <sys/errno.h>
+#include <curses.h>
 
+#define IN_BUFF 500
+# define Xv(err,res,str)	(x_void(err,res,str,__FILE__,__LINE__))
+# define Xi(err,res,str)		(x_int(err,res,str,__FILE__,__LINE__))
+# define Xst(err,res,str)		(x_size_t(err,res,str,__FILE__,__LINE__))
+# define Xl(err,res,str)		(x_long(err,res,str,__FILE__,__LINE__))
 typedef struct		s_clt_env
 {
 	int		svr_sock;
@@ -46,6 +52,9 @@ typedef struct		s_clt_env
 	char 	*port;
 	char 	*writbuff;
 	char 	*readbuff;
+	WINDOW	*winrsp;
+	WINDOW	*wincmd;
+	size_t 	idx;
 }					t_clt_env;
 
 typedef void(*t_builtin)(char **data);
@@ -69,10 +78,19 @@ void 				cmd_privmsg(char **data);
 void 				cmd_who(char **data);
 void 				cmd_connect(char **data);
 void				close_svr_sock();
+void				close_ncurses();
+void				close_all();
 void				send_write_buff(void);
 void				add_write_buff(char *data);
 void				rcv_data();
-void				print_prompt();
+void				return_cmd();
+void				input_handler(int c);
+long				x_long(int err, long res, char *str, char *file, int line);
+int					x_int(int err, int res, char *str, char *file, int line);
+size_t				x_size_t(int err, size_t res, char *str, char *file, int line);
+void				*x_void(void *err, void *res, char *str, char *file, int line);
+int 				ipv4(void);
+
 
 static t_builtin_cmd	g_builtin_cmd[] = {
 		{"/connect", cmd_connect},

@@ -18,5 +18,8 @@ void	cmd_leave(char **data)
         add_write_buff(send_data);
     }
     else
-        printf("usage: /leave [#channel[,#channel]] \n\te.g.\t/leave #foo,#bar");
+    {
+        wprintw(g_clt_env.winrsp, "usage: /leave [#channel[,#channel]] \n\te.g.\t/leave #foo,#bar");
+        return_cmd();
+    }
 }
