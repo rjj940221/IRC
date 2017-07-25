@@ -35,27 +35,27 @@ void loop_connection(struct addrinfo *servinfo)
 		{
 			close(g_clt_env.svr_sock);
 			p = p->ai_next;
-		} else
+		}
+		else
 			break;
 	}
 	if (p == NULL)
 	{
 		wprintw(g_clt_env.winrsp, "client: failed to connect\n");
 		close_svr_sock();
-	} else
-	{
-		inet_ntop(p->ai_family, get_in_addr(p->ai_addr),
-				  s, sizeof s);
-		wprintw(g_clt_env.winrsp, "client: connecting to %s\n", s);
-		return_cmd();
 	}
+	else
+	{
+		inet_ntop(p->ai_family, get_in_addr(p->ai_addr), s, sizeof s);
+		wprintw(g_clt_env.winrsp, "client: connecting to %s\n", s);
+	}
+	return_cmd();
 }
 
 void connect_to_server(void)
 {
 	struct addrinfo hints;
 	struct addrinfo *servinfo;
-
 	int rv;
 
 	if (!g_clt_env.host)
@@ -65,7 +65,8 @@ void connect_to_server(void)
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
 	g_clt_env.port = (g_clt_env.port) ? g_clt_env.port : "tcp";
-	if ((rv = getaddrinfo(g_clt_env.host, g_clt_env.port, &hints, &servinfo)) != 0)
+	if ((rv = getaddrinfo(g_clt_env.host, g_clt_env.port, &hints, &servinfo))
+		!= 0)
 	{
 		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
 		exit(1);
@@ -90,7 +91,8 @@ void input_loop(void)
 			FD_SET(g_clt_env.svr_sock, &writefds);
 		if (g_clt_env.svr_sock != -1)
 			FD_SET(g_clt_env.svr_sock, &readfds);
-		Xi(-1, select((g_clt_env.svr_sock == -1) ? 1 : g_clt_env.svr_sock + 1, &readfds, &writefds, NULL, NULL), "select");
+		Xi(-1, select((g_clt_env.svr_sock == -1) ? 1 : g_clt_env.svr_sock + 1
+				, &readfds, &writefds, NULL, NULL), "select");
 		if (FD_ISSET(0, &readfds))
 			input_handler(wgetch(g_clt_env.wincmd));
 		if (FD_ISSET(g_clt_env.svr_sock, &writefds))
@@ -106,6 +108,7 @@ void initwindow()
 	int wincol;
 
 	initscr();
+	start_color();
 	cbreak();
 	noecho();
 	refresh();
@@ -117,6 +120,11 @@ void initwindow()
 	scrollok(g_clt_env.winrsp, true);
 	wrefresh(g_clt_env.wincmd);
 	return_cmd();
+	init_pair(1, COLOR_BLACK, COLOR_WHITE);
+	init_pair(2, COLOR_BLACK, COLOR_GREEN);
+	init_pair(3, COLOR_BLACK, COLOR_RED);
+	init_pair(4, COLOR_BLACK, COLOR_BLUE);
+	color_set(1, NULL);
 }
 
 static void catch_inturupt(int signo)

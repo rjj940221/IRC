@@ -31,7 +31,9 @@ void	send_process_cmd(char *line)
 {
 	g_clt_env.idx = 0;
 	search_builin(line);
+	wattron(g_clt_env.winrsp, COLOR_PAIR(4));
 	wprintw(g_clt_env.winrsp, "%s\n", line);
+	wattroff(g_clt_env.winrsp, COLOR_PAIR(4));
 	bzero(line, IN_BUFF);
 	wclear(g_clt_env.wincmd);
 	wrefresh(g_clt_env.wincmd);

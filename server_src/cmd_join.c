@@ -26,6 +26,10 @@ void	join_channel(t_env *e, t_chl *chl, int cs, int chlidx)
 	char	*nrpl;
 
 	i = 0;
+	while (i < MAX_CHANNEL)
+		if (e->fds[cs].channels[i++] == chlidx)
+			return ;
+	i = 0;
 	while (i < MAX_CHANNEL_USER)
 	{
 		if (chl->user[i] == -1)

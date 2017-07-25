@@ -12,7 +12,7 @@
 
 #include "irc_client.h"
 
-int		check_port(const char *str)
+int check_port(const char *str)
 {
 	while (*str)
 	{
@@ -23,25 +23,31 @@ int		check_port(const char *str)
 	return (1);
 }
 
-void	close_svr_sock()
+void close_svr_sock()
 {
 	close(g_clt_env.svr_sock);
 	g_clt_env.svr_sock = -1;
 }
 
-void	return_cmd()
+void return_cmd()
 {
-	wmove(g_clt_env.wincmd, 0, (int)g_clt_env.idx);
+	wmove(g_clt_env.wincmd, 0, (int) g_clt_env.idx);
 	wrefresh(g_clt_env.winrsp);
 	wrefresh(g_clt_env.wincmd);
 }
 
-void	close_ncurses()
+void close_ncurses()
 {
 	if (g_clt_env.winrsp)
+	{
+		wattroff(g_clt_env.winrsp, COLOR_PAIR(1));
 		delwin(g_clt_env.winrsp);
+	}
 	if (g_clt_env.wincmd)
+	{
+		wattroff(g_clt_env.wincmd, COLOR_PAIR(1));
 		delwin(g_clt_env.wincmd);
+	}
 	g_clt_env.wincmd = NULL;
 	g_clt_env.winrsp = NULL;
 	endwin();
@@ -56,7 +62,7 @@ void close_all()
 	close_ncurses();
 }
 
-void	ft_print_exit(char *str)
+void ft_print_exit(char *str)
 {
 	close_all();
 	printf("\x1b[31mERROR: %s\x1b[31m\n", str);

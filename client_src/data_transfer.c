@@ -36,6 +36,7 @@ void	rcv_data()
 	{
 		close_svr_sock();
 		wprintw(g_clt_env.winrsp, "lost server connection\n");
+		return_cmd();
 	} else
 	{
 		buf[r] = '\0';
@@ -43,7 +44,6 @@ void	rcv_data()
 		while ((cmd = get_cmd(&g_clt_env.readbuff)) != NULL)
 		{
 			wprintw(g_clt_env.winrsp, "%s\n", cmd);
-			//this sort of works//printf("\033[s\r\033[%zu@%s\033[u\033[%zuC",ft_strlen(cmd) + 1, cmd, ft_strlen(cmd) + 1);
 			return_cmd();
 			ft_strdel(&cmd);
 		}

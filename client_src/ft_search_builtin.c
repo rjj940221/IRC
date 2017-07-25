@@ -25,9 +25,12 @@ void search_builin(char *line)
 	{
 		if (tav && tav[0] && ft_strcmp(tav[0], tmp->cmd) == 0)
 		{
-			(*tmp->fnc)(tav);
+			if (g_clt_env.svr_sock == -1 && ft_strcmp(tav[0], "/connect") != 0)
+				wprintw(g_clt_env.winrsp, "Error: not connected\n");
+			else
+				(*tmp->fnc)(tav);
 			ft_strarrdel(&tav);
-			return;
+			return (return_cmd());
 		}
 		tmp++;
 	}

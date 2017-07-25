@@ -27,7 +27,7 @@ t_bool	part_channel(int cs, t_chl *chl)
 	}
 	if (found == TRUE)
 		chl->user[MAX_CHANNEL_USER - 1] = -1;
-	if (chl->user[0] == 0)
+	if (chl->user[0] == -1)
 		clean_channle(chl);
 	return (found);
 }

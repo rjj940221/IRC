@@ -13,6 +13,8 @@ char *rpl_namrply(t_chl *chl, t_env *e)
 	idx = 0;
 	names = NULL;
 	rsp = NULL;
+	if (!chl)
+		return (NULL);
 	while (idx < MAX_CHANNEL_USER && chl->user[idx] != -1)
 	{
 		if (names)
