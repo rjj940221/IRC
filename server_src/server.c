@@ -1,7 +1,14 @@
-//
-// Created by Robert JONES on 2017/07/17.
-//
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/26 08:31:54 by rojones           #+#    #+#             */
+/*   Updated: 2017/07/26 08:32:36 by rojones          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "irc_server.h"
 
@@ -26,7 +33,7 @@ void	get_opt(t_env *env, int ac, char **av)
 	env->port = ft_atoi(av[1]);
 }
 
-int main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	t_env	env;
 

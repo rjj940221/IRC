@@ -1,13 +1,21 @@
-//
-// Created by Robert JONES on 2017/07/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_privmsg.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/26 10:52:44 by rojones           #+#    #+#             */
+/*   Updated: 2017/07/26 10:53:13 by rojones          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "irc_client.h"
 
 void	cmd_privmsg(char **data)
 {
 	char	*send_data;
-	size_t ac;
+	size_t	ac;
 
 	ac = ft_strarrlen((const char **)data);
 	if (ac > 2)
@@ -25,7 +33,8 @@ void	cmd_privmsg(char **data)
 	}
 	else
 	{
-		wprintw(g_clt_env.winrsp, "usage: /msg <nick> <message>\n\te.g.\t/msg bob,#bar hi bob and all on #foo\n");
+		wprintw(g_clt_env.winrsp, "usage: /msg <nick> <message>"
+				"\n\te.g.\t/msg bob,#bar hi bob and all on #foo\n");
 		return_cmd();
 	}
 }

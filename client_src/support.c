@@ -6,13 +6,13 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:19:55 by rojones           #+#    #+#             */
-/*   Updated: 2017/07/26 07:36:00 by rojones          ###   ########.fr       */
+/*   Updated: 2017/07/26 10:25:41 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "irc_client.h"
 
-int check_port(const char *str)
+int		check_port(const char *str)
 {
 	while (*str)
 	{
@@ -23,20 +23,20 @@ int check_port(const char *str)
 	return (1);
 }
 
-void close_svr_sock()
+void	close_svr_sock(void)
 {
 	close(g_clt_env.svr_sock);
 	g_clt_env.svr_sock = -1;
 }
 
-void return_cmd()
+void	return_cmd(void)
 {
-	wmove(g_clt_env.wincmd, 0, (int) g_clt_env.idx);
+	wmove(g_clt_env.wincmd, 0, (int)g_clt_env.idx);
 	wrefresh(g_clt_env.winrsp);
 	wrefresh(g_clt_env.wincmd);
 }
 
-void close_ncurses()
+void	close_ncurses(void)
 {
 	if (g_clt_env.winrsp)
 	{
@@ -54,7 +54,7 @@ void close_ncurses()
 	endwin();
 }
 
-void close_all()
+void	close_all(void)
 {
 	ft_strdel(&g_clt_env.readbuff);
 	ft_strdel(&g_clt_env.writbuff);

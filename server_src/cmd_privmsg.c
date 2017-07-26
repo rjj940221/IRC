@@ -1,12 +1,20 @@
-//
-// Created by Robert JONES on 2017/07/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_privmsg.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/26 08:10:53 by rojones           #+#    #+#             */
+/*   Updated: 2017/07/26 08:26:29 by rojones          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "irc_server.h"
 
-char *forward_msg(char *sender, char *recv, char *msg)
+char	*forward_msg(char *sender, char *recv, char *msg)
 {
-	char *forward;
+	char	*forward;
 
 	forward = ft_strjoin(":", sender);
 	forward = ft_strjoin_free_l(forward, " PRIVMSG ");
@@ -16,11 +24,11 @@ char *forward_msg(char *sender, char *recv, char *msg)
 	return (forward);
 }
 
-void privmsg_chl(t_env *e, char *chl_name, char *msg, int cs)
+void	privmsg_chl(t_env *e, char *chl_name, char *msg, int cs)
 {
-	int i;
-	t_chl *chl;
-	char *forward;
+	int		i;
+	t_chl	*chl;
+	char	*forward;
 
 	chl = find_channel(e, chl_name, &i);
 	if (chl == NULL)
@@ -32,7 +40,8 @@ void privmsg_chl(t_env *e, char *chl_name, char *msg, int cs)
 	{
 		if (chl->user[i] != cs)
 		{
-			forward = forward_msg(e->fds[cs].nick, e->fds[chl->user[i]].nick, msg);
+			forward = forward_msg(e->fds[cs].nick,
+					e->fds[chl->user[i]].nick, msg);
 			queue_rsp(e, chl->user[i], forward, NULL);
 			ft_strdel(&forward);
 		}
@@ -40,10 +49,10 @@ void privmsg_chl(t_env *e, char *chl_name, char *msg, int cs)
 	}
 }
 
-void privmsg_nick(t_env *e, char *nick, char *msg, int cs)
+void	privmsg_nick(t_env *e, char *nick, char *msg, int cs)
 {
-	size_t i;
-	char *forward;
+	size_t	i;
+	char	*forward;
 
 	i = 0;
 	while (i < MAX_SOCK)
@@ -60,7 +69,7 @@ void privmsg_nick(t_env *e, char *nick, char *msg, int cs)
 	queue_rsp(e, cs, "401 :No such nick/channel", NULL);
 }
 
-t_bool check_privmsg(t_env *e, char **av, int cs)
+t_bool	check_privmsg(t_env *e, char **av, int cs)
 {
 	if (av[1] == NULL || av[1][0] == ':')
 	{
@@ -75,10 +84,10 @@ t_bool check_privmsg(t_env *e, char **av, int cs)
 	return (TRUE);
 }
 
-void cmd_privmsg(t_env *e, char **av, int cs)
+void	cmd_privmsg(t_env *e, char **av, int cs)
 {
-	char **spl;
-	char **tmp;
+	char	**spl;
+	char	**tmp;
 
 	if (check_privmsg(e, av, cs) == TRUE)
 	{

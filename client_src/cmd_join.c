@@ -1,13 +1,21 @@
-//
-// Created by Robert JONES on 2017/07/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_join.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/26 10:15:23 by rojones           #+#    #+#             */
+/*   Updated: 2017/07/26 10:16:09 by rojones          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "irc_client.h"
 
 void	cmd_join(char **data)
 {
 	char	*send_data;
-	size_t ac;
+	size_t	ac;
 
 	ac = ft_strarrlen((const char **)data);
 	if (ac == 2)
@@ -18,7 +26,8 @@ void	cmd_join(char **data)
 	}
 	else
 	{
-		wprintw(g_clt_env.winrsp, "usage: /join <#channel>[,#channel] \n\te.g.\t/join #foo,#bar\n");
+		wprintw(g_clt_env.winrsp, "usage: /join <#channel>[,#channel] "
+				"\n\te.g.\t/join #foo,#bar\n");
 		return_cmd();
 	}
 }

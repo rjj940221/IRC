@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 07:26:54 by rojones           #+#    #+#             */
-/*   Updated: 2017/07/26 07:29:30 by rojones          ###   ########.fr       */
+/*   Updated: 2017/07/26 08:22:17 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	part_all(t_env *e, int cs)
 	ci = 0;
 	while (ci < MAX_CHANNEL && e->fds[cs].channels[ci] != -1)
 	{
-		part_channel( cs, &e->channels[e->fds[cs].channels[ci]]);
+		part_channel(cs, &e->channels[e->fds[cs].channels[ci]]);
 		e->fds[cs].channels[ci] = -1;
 		ci++;
 	}
@@ -94,7 +94,7 @@ void	part_list(t_env *e, char **spl, int cs)
 			ci++;
 		}
 		if (ci == MAX_CHANNEL)
-			queue_rsp(e, cs,"403 :No such channel", NULL);
+			queue_rsp(e, cs, "403 :No such channel", NULL);
 		spl++;
 	}
 }
@@ -104,7 +104,7 @@ void	cmd_part(t_env *e, char **av, int cs)
 	size_t	ac;
 	char	**spl;
 
-	ac = ft_strarrlen((const char **) av);
+	ac = ft_strarrlen((const char **)av);
 	if (ac == 1)
 		part_all(e, cs);
 	else if (ac == 2)

@@ -12,49 +12,49 @@
 
 #include "irc_client.h"
 
-size_t	x_size_t(size_t err, size_t res, char *str, char *file, int line)
+size_t	x_size_t(size_t err, size_t res, char *str)
 {
 	if (res == err)
 	{
 		close_all();
-		fprintf(stderr, "%s error (%s, %d): %s\n",
-				str, file, line, strerror(errno));
+		fprintf(stderr, "%s error: %s\n",
+				str, strerror(errno));
 		exit(1);
 	}
 	return (res);
 }
 
-int		x_int(int err, int res, char *str, char *file, int line)
+int		x_int(int err, int res, char *str)
 {
 	if (res == err)
 	{
 		close_all();
-		fprintf(stderr, "%s error (%s, %d): %s\n",
-				str, file, line, strerror(errno));
+		fprintf(stderr, "%s error: %s\n",
+				str, strerror(errno));
 		exit(1);
 	}
 	return (res);
 }
 
-long	x_long(int err, long res, char *str, char *file, int line)
+long	x_long(int err, long res, char *str)
 {
 	if (res == err)
 	{
 		close_all();
-		fprintf(stderr, "%s error (%s, %d): %s\n",
-				str, file, line, strerror(errno));
+		fprintf(stderr, "%s error: %s\n",
+				str, strerror(errno));
 		exit(1);
 	}
 	return (res);
 }
 
-void	*x_void(void *err, void *res, char *str, char *file, int line)
+void	*x_void(void *err, void *res, char *str)
 {
 	if (res == err)
 	{
 		close_all();
-		fprintf(stderr, "%s error (%s, %d): %s\n",
-				str, file, line, strerror(errno));
+		fprintf(stderr, "%s error: %s\n",
+				str, strerror(errno));
 		exit(1);
 	}
 	return (res);

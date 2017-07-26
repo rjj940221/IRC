@@ -1,6 +1,14 @@
-//
-// Created by Robert JONES on 2017/07/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   data_transfer.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/26 10:15:08 by rojones           #+#    #+#             */
+/*   Updated: 2017/07/26 10:22:53 by rojones          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "irc_client.h"
 
@@ -11,25 +19,27 @@ void	add_write_buff(char *data)
 
 void	send_write_buff(void)
 {
-	size_t size;
-	char *tmp;
-	long re;
+	size_t	size;
+	char	*tmp;
+	long	re;
 
-	size = (ft_strlen(g_clt_env.writbuff) < BUF_SIZE) ? ft_strlen(g_clt_env.writbuff) : BUF_SIZE;
+	size = (ft_strlen(g_clt_env.writbuff) < BUF_SIZE) ?
+		ft_strlen(g_clt_env.writbuff) : BUF_SIZE;
 	tmp = g_clt_env.writbuff;
-	re = Xl(-1, send(g_clt_env.svr_sock, tmp, size, 0), "send");
+	re = XL(-1, send(g_clt_env.svr_sock, tmp, size, 0), "send");
 	if (re > 0)
 	{
-		g_clt_env.writbuff = ft_strsub(g_clt_env.writbuff, (unsigned int)re, size - re);
+		g_clt_env.writbuff = ft_strsub(g_clt_env.writbuff,
+				(unsigned int)re, size - re);
 		ft_strdel(&tmp);
 	}
 }
 
-void	rcv_data()
+void	rcv_data(void)
 {
-	ssize_t r;
-	char buf[BUF_SIZE + 1];
-	char *cmd;
+	ssize_t	r;
+	char	buf[BUF_SIZE + 1];
+	char	*cmd;
 
 	r = recv(g_clt_env.svr_sock, buf, BUF_SIZE, 0);
 	if (r <= 0)
@@ -37,7 +47,8 @@ void	rcv_data()
 		close_svr_sock();
 		wprintw(g_clt_env.winrsp, "lost server connection\n");
 		return_cmd();
-	} else
+	}
+	else
 	{
 		buf[r] = '\0';
 		g_clt_env.readbuff = ft_strjoin_free_l(g_clt_env.readbuff, buf);

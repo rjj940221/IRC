@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 07:23:17 by rojones           #+#    #+#             */
-/*   Updated: 2017/07/26 07:26:35 by rojones          ###   ########.fr       */
+/*   Updated: 2017/07/26 08:45:42 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	search_cmd(t_env *env, char *cmd, int sock)
 	}
 	ft_strarrdel(&tav);
 }
-
-
 
 void	cln_read(t_env *e, int cs)
 {
@@ -68,12 +66,14 @@ void	cln_write(t_env *e, int cs)
 	char	*tmp;
 	long	re;
 
-	size = ((ft_strlen(e->fds[cs].buf_write) < BUF_SIZE) ? ft_strlen(e->fds[cs].buf_write) : BUF_SIZE);
+	size = ((ft_strlen(e->fds[cs].buf_write) < BUF_SIZE) ?
+			ft_strlen(e->fds[cs].buf_write) : BUF_SIZE);
 	tmp = e->fds[cs].buf_write;
-	re = Xl(-1, send(cs, tmp, size, 0), "send");
+	re = XL(-1, send(cs, tmp, size, 0), "send");
 	if (re > 0)
 	{
-		e->fds[cs].buf_write = ft_strsub(e->fds[cs].buf_write, (unsigned int)re, size - re);
+		e->fds[cs].buf_write = ft_strsub(e->fds[cs].buf_write,
+				(unsigned int)re, size - re);
 		ft_strdel(&tmp);
 	}
 }

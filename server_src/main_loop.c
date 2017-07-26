@@ -1,7 +1,14 @@
-//
-// Created by Robert JONES on 2017/07/17.
-//
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_loop.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/26 08:32:46 by rojones           #+#    #+#             */
+/*   Updated: 2017/07/26 08:33:11 by rojones          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "irc_server.h"
 
@@ -48,7 +55,8 @@ void	main_loop(t_env *env)
 	while (1)
 	{
 		init_fd(env);
-		env->r = select(env->max + 1, &env->fd_read, &env->fd_write, NULL, NULL);
+		env->r = select(env->max + 1, &env->fd_read,
+				&env->fd_write, NULL, NULL);
 		check_fd(env);
 	}
 }

@@ -15,7 +15,7 @@ CLN_OBJ = build_cln/client.o build_cln/cmd_join.o build_cln/cmd_leave.o\
 		  build_cln/cmd_nick.o build_cln/cmd_privmsg.o build_cln/cmd_who.o\
 		  build_cln/connect.o build_cln/data_transfer.o build_cln/exwraper.o\
 		  build_cln/ft_search_builtin.o build_cln/input_handler.o\
-		  build_cln/ipv.o build_cln/support.o
+		  build_cln/ipv.o build_cln/support.o build_cln/setup.o
 
 COM_OBJ = build/check_channle_name.o build/check_nick.o build/get_cmd.o\
 		  build/split_cmd.o 

@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/26 07:38:25 by rojones           #+#    #+#             */
-/*   Updated: 2017/07/26 07:38:44 by rojones          ###   ########.fr       */
+/*   Updated: 2017/07/26 10:54:17 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 # define TRUE	1
 # define CMD_TERM "\r\n"
 
-typedef char t_bool;
+typedef char	t_bool;
 
 int		check_nick(char *nick);
 t_bool	check_channle(char *name);
-char 	**split_cmd(char *cmd);
-char    *get_cmd(char **read_buff);
+char	**split_cmd(char *cmd);
+char	*get_cmd(char **read_buff);
 
 #endif

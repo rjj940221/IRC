@@ -1,12 +1,20 @@
-//
-// Created by rojones on 2017/07/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_join.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/26 08:17:59 by rojones           #+#    #+#             */
+/*   Updated: 2017/07/26 08:31:39 by rojones          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "irc_server.h"
 
 void	save_channle(t_env *e, int chlidx, int cs)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < MAX_CHANNEL)
@@ -22,7 +30,7 @@ void	save_channle(t_env *e, int chlidx, int cs)
 
 void	join_channel(t_env *e, t_chl *chl, int cs, int chlidx)
 {
-	size_t i;
+	size_t	i;
 	char	*nrpl;
 
 	i = 0;
@@ -51,7 +59,7 @@ void	join_channel(t_env *e, t_chl *chl, int cs, int chlidx)
 
 void	create_channel(t_env *e, char *name, int cs)
 {
-	size_t i;
+	size_t	i;
 	char	*nrpl;
 
 	i = 0;
@@ -75,19 +83,17 @@ void	create_channel(t_env *e, char *name, int cs)
 		queue_rsp(e, cs, "405", NULL);
 }
 
-
-
-void cmd_join(t_env *e, char **av, int cs)
+void	cmd_join(t_env *e, char **av, int cs)
 {
 	size_t	ac;
 	char	**spl;
-	char 	**tas;
+	char	**tas;
 	t_chl	*chl;
-	int 	idx;
+	int		idx;
 
 	if (e->fds[cs].nick[0] == '\0')
-		return (queue_rsp(e,cs,"476 :Nick not set", NULL));
-	ac = ft_strarrlen((const char **) av);
+		return (queue_rsp(e, cs, "476 :Nick not set", NULL));
+	ac = ft_strarrlen((const char **)av);
 	if (ac < 2 || ac > 3)
 		return (queue_rsp(e, cs, "461", NULL));
 	spl = ft_strsplit(av[1], ',');
@@ -95,8 +101,8 @@ void cmd_join(t_env *e, char **av, int cs)
 	while (*tas)
 	{
 		if (check_channle(*tas) == FALSE)
-			return (queue_rsp(e,cs,"476 :Channel invalid channel name", NULL));
-		chl = find_channel(e,*tas, &idx);
+			return (queue_rsp(e, cs, "476 :invalid channel name", NULL));
+		chl = find_channel(e, *tas, &idx);
 		if (chl)
 			join_channel(e, chl, cs, idx);
 		else

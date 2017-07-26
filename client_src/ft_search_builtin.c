@@ -6,19 +6,19 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/13 14:20:19 by rojones           #+#    #+#             */
-/*   Updated: 2017/07/13 14:20:27 by rojones          ###   ########.fr       */
+/*   Updated: 2017/07/26 10:17:50 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "irc_client.h"
 
-void search_builin(char *line)
+void	search_builin(char *line)
 {
-	char **tav;
-	t_builtin_cmd *tmp;
+	char			**tav;
+	t_builtin_cmd	*tmp;
 
 	if (!line)
-		return;
+		return ;
 	tav = ft_strsplit_fn(line, isspace);
 	tmp = g_builtin_cmd;
 	while (tmp->cmd)

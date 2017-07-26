@@ -1,14 +1,22 @@
-//
-// Created by Robert JONES on 2017/07/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rpl_namrply.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/26 08:40:25 by rojones           #+#    #+#             */
+/*   Updated: 2017/07/26 08:41:36 by rojones          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "irc_server.h"
 
-char *rpl_namrply(t_chl *chl, t_env *e)
+char	*rpl_namrply(t_chl *chl, t_env *e)
 {
-	size_t idx;
-	char *names;
-	char *rsp;
+	size_t	idx;
+	char	*names;
+	char	*rsp;
 
 	idx = 0;
 	names = NULL;

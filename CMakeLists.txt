@@ -37,7 +37,8 @@ set(CLN_SRC
         client_src/cmd_privmsg.c
         client_src/input_handler.c
         client_src/ipv.c
-        client_src/exwraper.c)
+        client_src/exwraper.c
+        client_src/setup.c)
 
 set(COM_SRC
         src/check_nick.c
