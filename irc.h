@@ -1,9 +1,17 @@
-//
-// Created by Robert JONES on 2017/07/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   irc.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/26 07:38:25 by rojones           #+#    #+#             */
+/*   Updated: 2017/07/26 07:38:44 by rojones          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef IRC_IRC_H
-#define IRC_IRC_H
+# define IRC_IRC_H
 
 # include <netdb.h>
 # include <stdio.h>
@@ -25,4 +33,4 @@ t_bool	check_channle(char *name);
 char 	**split_cmd(char *cmd);
 char    *get_cmd(char **read_buff);
 
-#endif //IRC_IRC_H
+#endif

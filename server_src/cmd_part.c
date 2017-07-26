@@ -1,13 +1,21 @@
-//
-// Created by rojones on 2017/07/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_part.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/26 07:26:54 by rojones           #+#    #+#             */
+/*   Updated: 2017/07/26 07:29:30 by rojones          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "irc_server.h"
 
 t_bool	part_channel(int cs, t_chl *chl)
 {
-	size_t ui;
-	t_bool found;
+	int		ui;
+	t_bool	found;
 
 	ui = 0;
 	found = FALSE;
@@ -32,9 +40,9 @@ t_bool	part_channel(int cs, t_chl *chl)
 	return (found);
 }
 
-void part_all(t_env *e, int cs)
+void	part_all(t_env *e, int cs)
 {
-	size_t ci;
+	int	ci;
 
 	ci = 0;
 	while (ci < MAX_CHANNEL && e->fds[cs].channels[ci] != -1)
@@ -45,9 +53,9 @@ void part_all(t_env *e, int cs)
 	}
 }
 
-void remove_channel_idx(t_fd *fd, size_t chlidx)
+void	remove_channel_idx(t_fd *fd, int chlidx)
 {
-	size_t	i;
+	int		i;
 	t_bool	found;
 
 	i = 0;
@@ -66,9 +74,9 @@ void remove_channel_idx(t_fd *fd, size_t chlidx)
 	}
 }
 
-void part_list(t_env *e, char **spl, int cs)
+void	part_list(t_env *e, char **spl, int cs)
 {
-	size_t ci;
+	size_t	ci;
 
 	while (spl && *spl)
 	{
@@ -91,10 +99,10 @@ void part_list(t_env *e, char **spl, int cs)
 	}
 }
 
-void cmd_part(t_env *e, char **av, int cs)
+void	cmd_part(t_env *e, char **av, int cs)
 {
-	size_t ac;
-	char **spl;
+	size_t	ac;
+	char	**spl;
 
 	ac = ft_strarrlen((const char **) av);
 	if (ac == 1)

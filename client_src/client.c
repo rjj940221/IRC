@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 12:41:34 by rojones           #+#    #+#             */
-/*   Updated: 2017/07/13 14:20:07 by rojones          ###   ########.fr       */
+/*   Updated: 2017/07/26 07:59:57 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ void connect_to_server(void)
 	hints.ai_family = AF_INET;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
-	g_clt_env.port = (g_clt_env.port) ? g_clt_env.port : "tcp";
+	g_clt_env.port = (g_clt_env.port) ? g_clt_env.port : NULL;
 	if ((rv = getaddrinfo(g_clt_env.host, g_clt_env.port, &hints, &servinfo))
 		!= 0)
 	{
+		close_all();
 		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
 		exit(1);
 	}
@@ -95,10 +96,13 @@ void input_loop(void)
 				, &readfds, &writefds, NULL, NULL), "select");
 		if (FD_ISSET(0, &readfds))
 			input_handler(wgetch(g_clt_env.wincmd));
-		if (FD_ISSET(g_clt_env.svr_sock, &writefds))
-			send_write_buff();
-		if (FD_ISSET(g_clt_env.svr_sock, &readfds))
-			rcv_data();
+		if (g_clt_env.svr_sock != -1)
+		{
+			if (FD_ISSET(g_clt_env.svr_sock, &writefds))
+				send_write_buff();
+			if (FD_ISSET(g_clt_env.svr_sock, &readfds))
+				rcv_data();
+		}
 	}
 }
 
@@ -129,6 +133,7 @@ void initwindow()
 
 static void catch_inturupt(int signo)
 {
+	signo++;
 	close_all();
 	exit(1);
 }
@@ -144,9 +149,9 @@ int main(int ac, char **av)
 		exit(1);
 	}
 	if (signal(SIGINT, catch_inturupt) == SIG_ERR)
-		ft_print_exit("failed to set up interrupt catch");
+		print_err_exit("signal",__FILE__,__LINE__,"failed to set up interrupt catch");
 	if (signal(SIGWINCH, catch_inturupt) == SIG_ERR)
-		ft_print_exit("failed to set up resize catch");
+		print_err_exit("signal",__FILE__,__LINE__,"failed to set up resize catch");
 	initwindow();
 	if (ac > 1)
 	{

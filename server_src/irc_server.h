@@ -1,11 +1,19 @@
-//
-// Created by Robert JONES on 2017/07/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   irc_server.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/26 07:39:06 by rojones           #+#    #+#             */
+/*   Updated: 2017/07/26 07:39:31 by rojones          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef IRC_IRC_SERVER_H
-#define IRC_IRC_SERVER_H
+# define IRC_IRC_SERVER_H
 
-#include <sys/socket.h>
+# include <sys/socket.h>
 # include <ctype.h>
 # include <sys/select.h>
 # include "../irc.h"
@@ -88,7 +96,7 @@ t_bool	user_in_chl(t_chl *chl, int user_id);
 void	part_all(t_env *e, int cs);
 long	x_long(int err, long res, char *str, char *file, int line);
 int		x_int(int err, int res, char *str, char *file, int line);
-size_t	x_size_t(int err, size_t res, char *str, char *file, int line);
+size_t	x_size_t(size_t err, size_t res, char *str, char *file, int line);
 void	*x_void(void *err, void *res, char *str, char *file, int line);
 int 	ipv4(void);
 

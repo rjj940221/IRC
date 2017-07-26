@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/12 10:04:52 by rojones           #+#    #+#             */
-/*   Updated: 2017/07/14 08:22:45 by rojones          ###   ########.fr       */
+/*   Updated: 2017/07/26 07:41:11 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,10 @@ void				return_cmd();
 void				input_handler(int c);
 long				x_long(int err, long res, char *str, char *file, int line);
 int					x_int(int err, int res, char *str, char *file, int line);
-size_t				x_size_t(int err, size_t res, char *str, char *file, int line);
+size_t				x_size_t(size_t err, size_t res, char *str, char *file, int line);
 void				*x_void(void *err, void *res, char *str, char *file, int line);
 int 				ipv4(void);
+void				print_err_exit(char *class, char *file, int line, char *msg);
 
 
 static t_builtin_cmd	g_builtin_cmd[] = {

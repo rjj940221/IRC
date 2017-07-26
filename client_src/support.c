@@ -6,7 +6,7 @@
 /*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 16:19:55 by rojones           #+#    #+#             */
-/*   Updated: 2017/07/13 13:12:33 by rojones          ###   ########.fr       */
+/*   Updated: 2017/07/26 07:36:00 by rojones          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,4 @@ void close_all()
 	ft_strdel(&g_clt_env.writbuff);
 	close_svr_sock();
 	close_ncurses();
-}
-
-void ft_print_exit(char *str)
-{
-	close_all();
-	printf("\x1b[31mERROR: %s\x1b[31m\n", str);
-	exit(1);
 }

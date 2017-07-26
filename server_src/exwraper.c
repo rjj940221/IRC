@@ -1,11 +1,18 @@
-//
-// Created by Robert JONES on 2017/07/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exwraper.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rojones <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/26 07:29:41 by rojones           #+#    #+#             */
+/*   Updated: 2017/07/26 07:38:09 by rojones          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "irc_server.h"
 
-#include "../irc.h"
-
-size_t x_size_t(int err, size_t res, char *str, char *file, int line)
+size_t x_size_t(size_t err, size_t res, char *str, char *file, int line)
 {
 	if (res == err)
 	{
